@@ -6,9 +6,10 @@
 .page {
   background-color: black;
   color: white;
-  margin-left: 200px;
-  margin-right: 200px;
-  font-family: "Inter", Arial, Helvetica, sans-serif;
+  margin: 0 auto;
+  padding-left: 200px;
+  padding-right: 200px;
+  font-family: "Inter", Arial, sans-serif;
   max-width: 880px;
 }
 
