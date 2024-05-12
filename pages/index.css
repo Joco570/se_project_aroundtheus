@@ -1,0 +1,8 @@
+@import url(../vendor/normalize.css);
+@import url("../vendor/fonts/Inter-Black.woff2");
+@import url("../vendor/fonts/Inter-Medium.woff2");
+@import url("../vendor/fonts/Inter-Regular.woff2");
+
+.test {
+  font-family: Inter, Arial, Helvetica, sans-serif;
+}
