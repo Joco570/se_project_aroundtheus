@@ -86,3 +86,54 @@
   color: #545454;
   margin: 67px 0 60px;
 }
+
+.cards {
+}
+
+.cards__list {
+  display: grid;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  align-content: space-between;
+  max-width: 282px;
+}
+
+.card__image {
+  height: 282px;
+  width: 282px;
+  padding: 0;
+  margin: 0;
+  border-radius: 10px 10px 0 0;
+}
+
+.card__description {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: black;
+  background-color: white;
+  border-radius: 0 0 10px 10px;
+  padding-top: 25px;
+  padding-bottom: 25px;
+  padding-left: 20px;
+  padding-right: 20px;
+  max-width: 282px;
+  margin: 0;
+}
+
+.card__title {
+  max-width: 282px;
+  font-size: 24px;
+  font-weight: 900;
+  line-height: 29.05px;
+}
+
+.card__like-button {
+  background: transparent url(../images/like-inactive.svg) center no-repeat;
+  width: 21px;
+  height: 18px;
+  border: none;
+}
