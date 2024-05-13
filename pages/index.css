@@ -89,21 +89,32 @@
 
 .cards__list {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(282px, 1fr));
-  grid-gap: 17px 20px;
+  justify-content: center;
+  align-items: start;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 20px 17px;
+  max-width: 880px;
+  margin: 0 auto;
+  padding: 0;
 }
 
 .card {
   display: flex;
   flex-direction: column;
-  align-content: space-between;
+  align-items: space-between;
   max-width: 282px;
+  margin: auto;
 }
 
 .card__container {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(282px, 1fr));
+  justify-content: center;
+  align-items: start;
+  grid-template-columns: repeat(auto-fit, minmax(1fr, 282px));
   grid-gap: 17px 20px;
+  max-width: 880px;
+  margin: 0;
+  padding-top: 51px;
 }
 
 .card__image {
@@ -127,9 +138,6 @@
   padding-right: 20px;
   max-width: 282px;
   margin: 0;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  overflow: hidden;
 }
 
 .card__title {
@@ -137,6 +145,9 @@
   font-size: 24px;
   font-weight: 900;
   line-height: 29.05px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 .card__like-button {
