@@ -87,11 +87,10 @@
   margin: 67px 0 60px;
 }
 
-.cards {
-}
-
 .cards__list {
   display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(282px, 1fr));
+  grid-gap: 17px 20px;
 }
 
 .card {
@@ -99,6 +98,12 @@
   flex-direction: column;
   align-content: space-between;
   max-width: 282px;
+}
+
+.card__container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(282px, 1fr));
+  grid-gap: 17px 20px;
 }
 
 .card__image {
@@ -122,6 +127,9 @@
   padding-right: 20px;
   max-width: 282px;
   margin: 0;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 .card__title {
