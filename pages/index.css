@@ -1,4 +1,4 @@
-@import url(../vendor/normalize.css);
+@import url("../vendor/normalize.css");
 @import url("../vendor/fonts/Inter-Black.woff2");
 @import url("../vendor/fonts/Inter-Medium.woff2");
 @import url("../vendor/fonts/Inter-Regular.woff2");
@@ -63,6 +63,16 @@
   border: 1px solid white;
 }
 
+.profile__edit-button:hover {
+  background: transparent url(../images/edit-icon.svg) center no-repeat;
+  height: 24px;
+  width: 24px;
+  grid-area: button;
+  align-self: center;
+  border: 1px solid white;
+  opacity: 60%;
+}
+
 .profile__info_description {
   font-size: 18px;
   line-height: 22px;
@@ -77,6 +87,17 @@
   height: 50px;
   margin-left: auto;
   border: 2px solid white;
+  border-radius: 2px;
+}
+
+.profile___add-button:hover {
+  background: transparent url(../images/add-icon-inactive.svg) center no-repeat;
+  width: 150px;
+  height: 50px;
+  margin-left: auto;
+  border: 2px solid white;
+  border-radius: 2px;
+  opacity: 60%;
 }
 
 .footer__copyright {
@@ -152,6 +173,13 @@
 
 .card__like-button {
   background: transparent url(../images/like-inactive.svg) center no-repeat;
+  width: 21px;
+  height: 18px;
+  border: none;
+}
+
+.card__like-button:hover {
+  background: transparent url(../images/like-active.svg) center no-repeat;
   width: 21px;
   height: 18px;
   border: none;
