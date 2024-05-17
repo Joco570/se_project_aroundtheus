@@ -62,12 +62,6 @@
 }
 
 .profile__edit-button:hover {
-  background: transparent url(../images/edit-icon.svg) center no-repeat;
-  height: 24px;
-  width: 24px;
-  grid-area: button;
-  align-self: center;
-  border: 1px solid white;
   opacity: 60%;
 }
 
@@ -79,7 +73,7 @@
   margin: 0;
 }
 
-.profile___add-button {
+.profile__add-button {
   background: transparent url(../images/add-icon-inactive.svg) center no-repeat;
   width: 150px;
   height: 50px;
@@ -88,13 +82,7 @@
   border-radius: 2px;
 }
 
-.profile___add-button:hover {
-  background: transparent url(../images/add-icon-inactive.svg) center no-repeat;
-  width: 150px;
-  height: 50px;
-  margin-left: auto;
-  border: 2px solid white;
-  border-radius: 2px;
+.profile__add-button:hover {
   opacity: 60%;
 }
 
@@ -179,27 +167,49 @@
   border: none;
 }
 
-@media (max-width: 1280px) {
-  .page {
+@media screen and (min-width: 320px) and (max-width: 768px) {
+  .profile {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .profile__info {
+    text-align: center;
+  }
+
+  .profile__info_title {
+    margin-top: 14px;
+    font-size: 22px;
+    line-height: 26.63px;
+    text-align: center;
+    display: inline-block;
     max-width: 100%;
-    padding-left: 50px;
-    padding-right: 50px;
   }
-}
 
-@media (max-width: 880px) {
-  .cards__list {
-    grid-template-columns: repeat(2, 1fr);
+  .profile__edit-button {
+    margin-left: 0;
   }
-}
 
-@media (max-width: 600px) {
-  .page {
-    padding-left: 20px;
-    padding-right: 20px;
+  .profile__image {
+    margin: 42px auto 30px;
+  }
+
+  .profile__add-button {
+    width: 100%;
+    margin-top: 36px;
   }
 
   .cards__list {
     grid-template-columns: 1fr;
+  }
+}
+
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+  .page {
+    max-width: calc(100% - 38px);
+  }
+
+  .cards__list {
+    grid-template-columns: repeat(2, 1fr);
   }
 }
