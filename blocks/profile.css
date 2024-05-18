@@ -25,15 +25,14 @@
   font-weight: 500;
   grid-area: title;
   margin: 0 0 7px;
-  text-overflow: ellipsis;
   white-space: nowrap;
-  overflow: hidden;
 }
 
 .profile__edit-button {
   background: transparent url(../images/edit-icon.svg) center no-repeat;
   height: 24px;
   width: 24px;
+  margin-left: 18px;
   grid-area: button;
   align-self: center;
   border: 1px solid white;
@@ -89,10 +88,13 @@
     text-align: center;
     display: inline-block;
     max-width: 100%;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
   }
 
   .profile__edit-button {
-    margin-left: 0;
+    margin-left: 10px;
     width: 18px;
     height: 18px;
   }
@@ -111,5 +113,8 @@
   .profile__description {
     font-size: 14px;
     line-height: 16.94px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
   }
 }
