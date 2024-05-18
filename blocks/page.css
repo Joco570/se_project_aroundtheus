@@ -6,11 +6,16 @@
   max-width: 880px;
   padding-left: 19px;
   padding-right: 19px;
-  overflow-x: hidden;
 }
 
 @media screen and (min-width: 768px) and (max-width: 1024px) {
   .page {
     max-width: calc(100% - 38px);
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .page {
+    overflow-x: hidden;
   }
 }

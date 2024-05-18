@@ -21,22 +21,20 @@
   color: black;
   background-color: white;
   border-radius: 0 0 10px 10px;
-  padding-top: 25px;
-  padding-bottom: 25px;
-  padding-left: 20px;
-  padding-right: 20px;
+  padding: 25px 20px;
   max-width: 282px;
   margin: 0;
 }
 
 .card__title {
-  max-width: 282px;
+  max-width: 219px;
   font-size: 24px;
   font-weight: 900;
   line-height: 29.05px;
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
+  margin: 0;
 }
 
 .card__like-button {
@@ -44,11 +42,9 @@
   width: 21px;
   height: 18px;
   border: none;
+  cursor: pointer;
 }
 
 .card__like-button:hover {
   background: transparent url(../images/like-active.svg) center no-repeat;
-  width: 21px;
-  height: 18px;
-  border: none;
 }
