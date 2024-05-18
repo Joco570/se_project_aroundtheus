@@ -2,6 +2,8 @@
 
 This is the thirds project of the Software Engineering program at TripleTen. It was created using HTML and CSS, based on provided figma design (https://www.figma.com/design/Es8zZP3ARGH9JGcw60i3OD/Sprint-3_-Around-the-US?node-id=0-1&t=9y9HHlikuadT0pOm-0).
 
+Page is deployed at: https://joco570.github.io/se_project_aroundtheus/
+
 ## Project features
 
 - Semantic HTML5
