@@ -15,11 +15,15 @@
   .cards__list {
     grid-template-columns: 1fr;
     padding-top: 36px;
+    padding-left: 19px; /* Maintain left padding */
+    padding-right: 19px; /* Maintain right padding */
   }
 }
 
 @media screen and (min-width: 768px) and (max-width: 1024px) {
   .cards__list {
     grid-template-columns: repeat(2, 1fr);
+    padding-left: 19px; /* Maintain left padding */
+    padding-right: 19px; /* Maintain right padding */
   }
 }
