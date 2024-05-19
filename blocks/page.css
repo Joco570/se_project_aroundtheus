@@ -4,8 +4,6 @@
   margin: 0 auto;
   font-family: Inter, Arial, Helvetica, sans-serif;
   max-width: 880px;
-  padding-left: 19px;
-  padding-right: 19px;
 }
 
 @media screen and (min-width: 768px) and (max-width: 1024px) {
@@ -16,6 +14,6 @@
 
 @media screen and (max-width: 768px) {
   .page {
-    overflow-x: hidden;
+    max-width: 768px;
   }
 }

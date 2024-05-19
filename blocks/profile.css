@@ -2,6 +2,7 @@
   display: flex;
   align-items: center;
   padding-top: 40px;
+  justify-content: center;
 }
 
 .profile__image {
@@ -17,6 +18,9 @@
   display: grid;
   grid-template-areas: "title button" "description description";
   grid-template-columns: minmax(auto, 373px) auto;
+  overflow: hidden;
+  justify-content: center;
+  gap: 10px;
 }
 
 .profile__title {
@@ -24,8 +28,12 @@
   line-height: 48px;
   font-weight: 500;
   grid-area: title;
-  margin: 0 0 7px;
-  white-space: nowrap;
+  margin: 0 auto 7px;
+  min-width: 420px;
+  overflow: hidden;
+  text-wrap: nowrap;
+  text-overflow: ellipsis;
+  justify-self: center;
 }
 
 .profile__edit-button {
@@ -36,6 +44,7 @@
   grid-area: button;
   align-self: center;
   border: 1px solid white;
+  cursor: pointer;
 }
 
 .profile__edit-button:hover {
@@ -51,6 +60,8 @@
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
+  max-width: 420px;
+  justify-self: center;
 }
 
 .profile__add-button {
@@ -60,25 +71,25 @@
   margin-left: auto;
   border: 2px solid white;
   border-radius: 2px;
+  cursor: pointer;
 }
 
 .profile__add-button:hover {
   opacity: 60%;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 750px) {
   .profile {
     flex-direction: column;
     align-items: center;
     padding-top: 0;
+    justify-content: center;
   }
 
   .profile__info {
     text-align: center;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    overflow: hidden;
-    max-width: 373px;
+    max-width: 100%;
+    justify-content: center;
   }
 
   .profile__title {
@@ -87,10 +98,11 @@
     line-height: 26.63px;
     text-align: center;
     display: inline-block;
-    max-width: 100%;
+    max-width: 200px;
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
+    justify-self: center;
   }
 
   .profile__edit-button {
@@ -104,8 +116,8 @@
   }
 
   .profile__add-button {
-    width: 100%;
-    margin-top: 36px;
+    width: 95%;
+    margin: 36px auto 0;
     padding-left: 19px;
     padding-right: 19px;
   }
@@ -116,5 +128,12 @@
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
+    justify-self: center;
+  }
+}
+
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+  .profile__info {
+    grid-template-columns: 1fr auto;
   }
 }
