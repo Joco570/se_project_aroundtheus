@@ -86,9 +86,12 @@
   }
 
   .profile__info {
+    display: flex;
+    flex-wrap: wrap;
     text-align: center;
     max-width: 100%;
     justify-content: center;
+    max-width: 265px;
   }
 
   .profile__title {
@@ -96,16 +99,16 @@
     line-height: 26.63px;
     text-align: center;
     display: inline-block;
-    max-width: calc(100% - 42px)
+    max-width: 230px;
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
     justify-self: center;
-    margin: 0 auto;
+    margin: 0;
   }
 
   .profile__edit-button {
-    margin-left: 10px;
+    margin: 0;
     width: 18px;
     height: 18px;
   }
