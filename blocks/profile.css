@@ -29,7 +29,6 @@
   font-weight: 500;
   grid-area: title;
   margin: 0 auto 7px;
-  min-width: 420px;
   overflow: hidden;
   text-wrap: nowrap;
   text-overflow: ellipsis;
@@ -40,7 +39,7 @@
   background: transparent url(../images/edit-icon.svg) center no-repeat;
   height: 24px;
   width: 24px;
-  margin-left: 18px;
+  margin: 0 18px;
   grid-area: button;
   align-self: center;
   border: 1px solid white;
@@ -97,11 +96,12 @@
     line-height: 26.63px;
     text-align: center;
     display: inline-block;
-    max-width: 200px;
+    max-width: calc(100% - 42px)
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
     justify-self: center;
+    margin: 0 auto;
   }
 
   .profile__edit-button {
@@ -115,7 +115,7 @@
   }
 
   .profile__add-button {
-    width: 95%;
+    width: 88%;
     margin: 36px auto 0;
     padding-left: 19px;
     padding-right: 19px;
