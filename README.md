@@ -4,6 +4,8 @@ This is the thirds project of the Software Engineering program at TripleTen. It 
 
 Page is deployed at: https://joco570.github.io/se_project_aroundtheus/
 
+Video of project overview: https://youtu.be/tRzR-P63QIU
+
 ## Project features
 
 - Semantic HTML5
