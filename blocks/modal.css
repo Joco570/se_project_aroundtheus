@@ -1,0 +1,53 @@
+.modal {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 999;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  padding: 0 19px;
+  /*display: none;*/
+}
+
+.modal_opened {
+  display: flex;
+}
+
+.modal__container {
+  background-color: white;
+  margin: auto;
+  padding: 36px;
+  border-radius: 10px;
+  position: relative;
+  display: ;
+}
+
+.modal__header {
+  color: black;
+}
+
+.modal__save {
+  height: 24px;
+  width: 24px;
+  margin: 0 18px;
+  grid-area: button;
+  align-self: center;
+  border: 1px solid white;
+  cursor: pointer;
+}
+
+.modal__close {
+  background-image: url("../images/Close.svg");
+  border: none;
+  background-color: transparent;
+  height: 40px;
+  width: 40px;
+  background-repeat: no-repeat;
+  background-size: contain;
+  position: absolute;
+  bottom: calc(100% + 6px);
+  left: calc(100% + 6px);
+  cursor: pointer;
+}
