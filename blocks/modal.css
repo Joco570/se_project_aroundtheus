@@ -53,6 +53,10 @@
   border-radius: 2px;
 }
 
+.modal__save:hover {
+  opacity: 80%;
+}
+
 .modal__close {
   background-image: url("../images/Close.svg");
   border: none;
@@ -67,6 +71,10 @@
   cursor: pointer;
 }
 
+.modal__close:hover {
+  opacity: 60%;
+}
+
 .modal__input {
   display: block;
   margin-bottom: 13.26px;
@@ -79,6 +87,21 @@
   border-style: none;
   box-shadow: none;
   outline: none;
+  border-bottom: 1px;
+  border-color: black;
   padding: 0;
   background: transparent;
+}
+
+@media screen and (max-width: 768px) {
+  .modal__container {
+    width: 282px;
+    height: 322px;
+  }
+
+  .modal__close {
+    width: 26px;
+    height: 26px;
+    bottom: calc(100%+11px);
+  }
 }
