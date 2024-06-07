@@ -10,10 +10,10 @@
   padding: 0 19px;
   border-radius: 1px;
   border-color: black;
-  /* display: none; */
+  display: none;
 }
 
-.modal_opened {
+.modal__opened {
   display: flex;
 }
 
