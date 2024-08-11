@@ -62,6 +62,15 @@ function getCardElement(cardData) {
   return cardElement;
 }
 
+function addLikeButtonListeners() {
+  const likeButtons = document.querySelectorAll(".card__like-button");
+  likeButtons.forEach((likeButton) => {
+    likeButton.addEventListener("click", () => {
+      likeButton.classList.toggle("card__like-button_active");
+    });
+  });
+}
+
 /* Event Handlers */
 function handleProfileEditSubmit(e) {
   e.preventDefault();
@@ -74,6 +83,10 @@ function handleAddCardSubmit(e) {
   e.preventDefault();
   const titleValue = cardTitleInput.value;
   const linkValue = cardLinkInput.value;
+  if (!titleValue || !linkValue) {
+    console.log("Both title and link are required.");
+    return;
+  }
   const newCardData = {
     name: titleValue,
     link: linkValue,
@@ -82,8 +95,13 @@ function handleAddCardSubmit(e) {
   const cardElement = getCardElement(newCardData);
   cardListElement.prepend(cardElement);
 
+  // Reset form inputs
   cardTitleInput.value = "";
   cardLinkInput.value = "";
+
+  // Add like button listeners to the new cards
+  addLikeButtonListeners();
+
   closePopUp(profileAddModal);
 }
 
@@ -104,10 +122,14 @@ modalCloseButtons.forEach((button) => {
 profileEditForm.addEventListener("submit", handleProfileEditSubmit);
 addFormModal.addEventListener("submit", handleAddCardSubmit);
 
+// Initialize existing cards
 initialCards.forEach((cardData) => {
   const cardElement = getCardElement(cardData);
   cardListElement.prepend(cardElement);
 });
+
+// Add like button listeners to existing cards
+addLikeButtonListeners();
 
 addNewCardButton.addEventListener("click", () => {
   profileAddModal.classList.add("modal_opened");
