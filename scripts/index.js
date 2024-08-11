@@ -38,8 +38,6 @@ const profileDescriptionInput = document.querySelector(
   "#profile-description-input"
 );
 const profileEditForm = profileEditModal.querySelector("#profile-edit-form");
-const cardTemplate =
-  document.querySelector("#card-template").content.firstElementChild;
 const cardListElement = document.querySelector(".cards__list");
 const addFormModal = document.querySelector("#profile-Add-form");
 const addNewCardButton = document.querySelector(".profile__add-button");
@@ -51,14 +49,39 @@ function closePopUp(modal) {
   modal.classList.remove("modal_opened");
 }
 
-function getCardElement(cardData) {
-  const cardElement = cardTemplate.cloneNode(true);
-  const cardImageElement = cardElement.querySelector(".card__image");
-  const cardTitleElement = cardElement.querySelector(".card__title");
+function createCardElement(cardData) {
+  // Create card elements
+  const cardElement = document.createElement("li");
+  cardElement.classList.add("card");
 
-  cardTitleElement.textContent = cardData.name;
+  const deleteButton = document.createElement("button");
+  deleteButton.classList.add("card__delete-button");
+  deleteButton.type = "button";
+
+  const cardImageElement = document.createElement("img");
+  cardImageElement.classList.add("card__image");
   cardImageElement.src = cardData.link;
   cardImageElement.alt = cardData.name;
+
+  const cardDescriptionElement = document.createElement("div");
+  cardDescriptionElement.classList.add("card__description");
+
+  const cardTitleElement = document.createElement("h2");
+  cardTitleElement.classList.add("card__title");
+  cardTitleElement.textContent = cardData.name;
+
+  const likeButton = document.createElement("button");
+  likeButton.classList.add("card__like-button");
+  likeButton.type = "button";
+
+  // Append elements
+  cardDescriptionElement.append(cardTitleElement, likeButton);
+  cardElement.append(deleteButton, cardImageElement, cardDescriptionElement);
+
+  deleteButton.addEventListener("click", () => {
+    cardElement.remove();
+  });
+
   return cardElement;
 }
 
@@ -92,7 +115,7 @@ function handleAddCardSubmit(e) {
     link: linkValue,
   };
 
-  const cardElement = getCardElement(newCardData);
+  const cardElement = createCardElement(newCardData);
   cardListElement.prepend(cardElement);
 
   // Reset form inputs
@@ -124,7 +147,7 @@ addFormModal.addEventListener("submit", handleAddCardSubmit);
 
 // Initialize existing cards
 initialCards.forEach((cardData) => {
-  const cardElement = getCardElement(cardData);
+  const cardElement = createCardElement(cardData);
   cardListElement.prepend(cardElement);
 });
 
