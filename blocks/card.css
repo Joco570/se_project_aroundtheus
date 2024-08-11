@@ -3,6 +3,7 @@
   flex-direction: column;
   max-width: 282px;
   margin: auto;
+  position: relative; /* Ensure the card is the positioning context for the delete button */
 }
 
 .card__image {
@@ -47,4 +48,19 @@
 
 .card__like-button_active {
   background: transparent url(../images/like-liked.svg) center no-repeat;
+}
+
+.card__delete-button {
+  position: absolute;
+  top: 18px;
+  right: 15px;
+  background: transparent url(../images/Delete-icon.svg) center no-repeat;
+  width: 18px;
+  height: 19.3px;
+  border: none;
+  cursor: pointer;
+}
+
+.card__delete-button:hover {
+  opacity: 60%;
 }
