@@ -1,3 +1,4 @@
+/* Data */
 const initialCards = [
   {
     name: `Yosemite Valley`,
@@ -25,7 +26,7 @@ const initialCards = [
   },
 ];
 
-/*Elements*/
+/* Elements */
 const profileEditButton = document.querySelector("#profile-edit-button");
 const profileEditModal = document.querySelector("#Profile-Edit-Modal");
 const profileAddModal = document.querySelector("#Profile-Add-Modal");
@@ -40,9 +41,12 @@ const profileEditForm = profileEditModal.querySelector("#profile-edit-form");
 const cardTemplate =
   document.querySelector("#card-template").content.firstElementChild;
 const cardListElement = document.querySelector(".cards__list");
+const addFormModal = document.querySelector("#profile-Add-form");
 const addNewCardButton = document.querySelector(".profile__add-button");
+const cardTitleInput = document.querySelector("#Modal-Add-Title");
+const cardLinkInput = document.querySelector("#Modal-Add-Link");
 
-/*Functions*/
+/* Functions */
 function closePopUp(modal) {
   modal.classList.remove("modal_opened");
 }
@@ -58,7 +62,7 @@ function getCardElement(cardData) {
   return cardElement;
 }
 
-/*Event Handlers*/
+/* Event Handlers */
 function handleProfileEditSubmit(e) {
   e.preventDefault();
   profileTitle.textContent = profileTitleInput.value;
@@ -66,7 +70,24 @@ function handleProfileEditSubmit(e) {
   closePopUp(profileEditModal);
 }
 
-/*Event Listeners*/
+function handleAddCardSubmit(e) {
+  e.preventDefault();
+  const titleValue = cardTitleInput.value;
+  const linkValue = cardLinkInput.value;
+  const newCardData = {
+    name: titleValue,
+    link: linkValue,
+  };
+
+  const cardElement = getCardElement(newCardData);
+  cardListElement.prepend(cardElement);
+
+  cardTitleInput.value = "";
+  cardLinkInput.value = "";
+  closePopUp(profileAddModal);
+}
+
+/* Event Listeners */
 profileEditButton.addEventListener("click", () => {
   profileTitleInput.value = profileTitle.textContent;
   profileDescriptionInput.value = profileDescription.textContent;
@@ -81,6 +102,7 @@ modalCloseButtons.forEach((button) => {
 });
 
 profileEditForm.addEventListener("submit", handleProfileEditSubmit);
+addFormModal.addEventListener("submit", handleAddCardSubmit);
 
 initialCards.forEach((cardData) => {
   const cardElement = getCardElement(cardData);
