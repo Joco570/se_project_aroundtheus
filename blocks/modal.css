@@ -8,8 +8,6 @@
   background-color: rgba(0, 0, 0, 0.5);
   display: flex;
   padding: 0 19px;
-  border-radius: 1px;
-  border-color: black;
   display: none;
 }
 
@@ -24,7 +22,7 @@
   margin: auto;
   padding: 36px;
   border-radius: 10px;
-  position: relative;
+  position: relative; /* Ensure correct positioning for children */
   width: 358px;
   height: 259.5px;
 }
@@ -78,13 +76,12 @@
 
 .modal__input {
   display: block;
-
   width: 358px;
   height: 27.26px;
   font-size: 14px;
   font-weight: 400;
   line-height: 16.94px;
-  color: rgba(0, 0, 0, 1);
+  color: rgba(196, 196, 196, 1);
   border: none;
   box-shadow: none;
   outline: none;
@@ -103,13 +100,44 @@
   margin-bottom: 48px;
 }
 
+/* Specific styles for the preview modal */
+.modal__container_preview {
+  border: none;
+  box-shadow: none;
+  background-color: transparent;
+  max-width: none;
+  padding: 0;
+  position: relative; /* Ensure correct positioning for children */
+}
+
+.modal__image {
+  max-width: 75vw;
+  max-height: 75vw;
+  display: block;
+  margin: 0;
+  padding: 0;
+}
+
+.modal__caption {
+  color: white;
+  text-align: left;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 14.52px;
+  margin-top: 10px;
+}
+
+.modal__close_preview {
+  position: absolute;
+  top: -42px;
+  right: -30px;
+}
+
 /* Responsive styles */
-@media screen and (max-width: 768px) {
+@media (max-width: 768px) {
   .modal__container {
-    width: 282px;
-    height: auto;
-    padding: 25px 22px;
-    align-items: center;
+    width: 90%;
+    max-width: 300px;
   }
 
   .modal__close {
@@ -138,35 +166,10 @@
     height: 46px;
     align-self: center;
   }
-}
 
-/* Specific styles for the preview modal */
-#Preview-Modal .modal__container {
-  border: none;
-  box-shadow: none;
-  background-color: transparent;
-  max-width: none;
-  padding: 0;
-}
-
-.modal__image {
-  max-width: 75vw;
-  max-height: 75vw;
-  display: block;
-  margin: 0;
-  padding: 0;
-}
-
-.modal_close-preview {
-  top: -10px;
-  right: -10px;
-}
-
-.modal__caption {
-  color: white;
-  text-align: left;
-  font-weight: 400;
-  font-size: 12px;
-  line-height: 14.52px;
-  margin-top: 10px;
+  /* Ensure .modal__close_preview remains unaffected by media queries */
+  .modal__close_preview {
+    top: -30px;
+    right: -30px;
+  }
 }
