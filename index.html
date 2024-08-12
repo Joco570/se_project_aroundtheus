@@ -93,12 +93,25 @@
             class="modal__input"
           />
           <button class="modal__save" id="Modal-Save-Button" type="submit">
-            Save
+            Create
           </button>
         </form>
       </div>
     </div>
 
+    <!-- Preview Modal -->
+    <div class="modal" id="Preview-Modal">
+      <div class="modal__container modal__container-preview">
+        <button
+          class="modal__close modal__close-preview"
+          id="Modal-Close-Button"
+        ></button>
+        <img class="modal__image" src="" alt="" />
+        <p class="modal__caption" id="modal-caption"></p>
+      </div>
+    </div>
+
+    <!-- Card Template -->
     <template id="card-template">
       <li class="card">
         <button class="card__delete-button" type="button"></button>

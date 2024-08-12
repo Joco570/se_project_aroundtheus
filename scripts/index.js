@@ -1,4 +1,4 @@
-/* Data */
+// Data
 const initialCards = [
   {
     name: `Yosemite Valley`,
@@ -26,7 +26,7 @@ const initialCards = [
   },
 ];
 
-/* Elements */
+// Elements
 const profileEditButton = document.querySelector("#profile-edit-button");
 const profileEditModal = document.querySelector("#Profile-Edit-Modal");
 const profileAddModal = document.querySelector("#Profile-Add-Modal");
@@ -43,8 +43,11 @@ const addFormModal = document.querySelector("#profile-Add-form");
 const addNewCardButton = document.querySelector(".profile__add-button");
 const cardTitleInput = document.querySelector("#Modal-Add-Title");
 const cardLinkInput = document.querySelector("#Modal-Add-Link");
+const previewModal = document.querySelector("#Preview-Modal");
+const previewImage = previewModal.querySelector(".modal__image");
+const previewCaption = previewModal.querySelector("#modal-caption");
 
-/* Functions */
+// Functions
 function closePopUp(modal) {
   modal.classList.remove("modal_opened");
 }
@@ -82,7 +85,18 @@ function createCardElement(cardData) {
     cardElement.remove();
   });
 
+  cardImageElement.addEventListener("click", () => {
+    openPreviewModal(cardData);
+  });
+
   return cardElement;
+}
+
+function openPreviewModal(cardData) {
+  previewImage.src = cardData.link;
+  previewImage.alt = cardData.name;
+  previewCaption.textContent = cardData.name;
+  previewModal.classList.add("modal_opened");
 }
 
 function addLikeButtonListeners() {
@@ -94,7 +108,7 @@ function addLikeButtonListeners() {
   });
 }
 
-/* Event Handlers */
+// Event Handlers
 function handleProfileEditSubmit(e) {
   e.preventDefault();
   profileTitle.textContent = profileTitleInput.value;
@@ -128,7 +142,7 @@ function handleAddCardSubmit(e) {
   closePopUp(profileAddModal);
 }
 
-/* Event Listeners */
+// Event Listeners
 profileEditButton.addEventListener("click", () => {
   profileTitleInput.value = profileTitle.textContent;
   profileDescriptionInput.value = profileDescription.textContent;
