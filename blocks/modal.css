@@ -114,7 +114,7 @@
 }
 
 /* Specific styles for the preview modal */
-.modal__container_preview {
+.modal__container--preview {
   border: none;
   box-shadow: none;
   background-color: transparent;
@@ -146,7 +146,7 @@
   margin-top: 10px;
 }
 
-.modal__close_preview {
+.modal__close--preview {
   position: absolute;
   top: -42px;
   right: -30px;
@@ -187,13 +187,13 @@
     align-self: center;
   }
 
-  .modal__container_preview {
+  .modal__container--preview {
     max-width: 90vw;
     max-height: 90vh;
   }
 
-  /* Ensure .modal__close_preview remains unaffected by media queries */
-  .modal__close_preview {
+  /* Ensure .modal__close--preview remains unaffected by media queries */
+  .modal__close--preview {
     top: -30px;
     right: -30px;
   }

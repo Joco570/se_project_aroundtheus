@@ -48,13 +48,11 @@ const cardTemplate = document
 
 // Universal functions
 function openPopup(popup) {
-  popup.classList.add("modal_opened");
-
   if (popup === profileEditModal) {
-    profileForm.elements["title"].placeholder = profileTitle.textContent;
-    profileForm.elements["description"].placeholder =
-      profileDescription.textContent;
+    profileForm.elements["title"].value = profileTitle.textContent;
+    profileForm.elements["description"].value = profileDescription.textContent;
   }
+  popup.classList.add("modal_opened");
 }
 
 function closePopUp(modal) {
@@ -96,6 +94,12 @@ function openPreviewModal(cardData) {
   openPopup(previewModal);
 }
 
+// Universal function to render a card
+function renderCard(item, method = "prepend") {
+  const cardElement = createCardElement(item);
+  cardListElement[method](cardElement);
+}
+
 // Event Handlers
 function handleProfileEditSubmit(e) {
   e.preventDefault();
@@ -117,8 +121,7 @@ function handleAddCardSubmit(e) {
     link: linkValue,
   };
 
-  const cardElement = createCardElement(newCardData);
-  cardListElement.prepend(cardElement);
+  renderCard(newCardData); // By default, uses 'prepend' method
 
   cardForm.reset();
 
@@ -145,6 +148,5 @@ modalCloseButtons.forEach((button) => {
 
 // Initialize Cards
 initialCards.forEach((cardData) => {
-  const cardElement = createCardElement(cardData);
-  cardListElement.append(cardElement);
+  renderCard(cardData, "append"); // Uses 'append' method to add initial cards
 });
