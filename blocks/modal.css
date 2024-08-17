@@ -20,7 +20,6 @@
 .modal_opened {
   opacity: 1;
   visibility: visible;
-  display: flex;
 }
 
 /* Styles for modal container */
@@ -155,8 +154,7 @@
 /* Responsive styles */
 @media (max-width: 768px) {
   .modal__container {
-    width: 90%;
-    max-width: 300px;
+    width: 282px;
   }
 
   .modal__close {
@@ -171,6 +169,7 @@
   .modal__header {
     margin-bottom: 75px;
     font-size: 18px;
+    line-height: 21.78px;
   }
 
   .modal__input {
@@ -185,6 +184,8 @@
     width: 100%;
     height: 46px;
     align-self: center;
+    font-size: 14px;
+    line-height: 16.94px;
   }
 
   .modal__container--preview {
