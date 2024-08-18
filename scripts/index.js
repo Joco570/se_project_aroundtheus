@@ -48,6 +48,8 @@ const cardTemplate = document
 
 // Universal functions
 function openPopup(popup) {
+  if (popup === profileEditModal) {
+  }
   popup.classList.add("modal_opened");
 }
 
@@ -117,7 +119,7 @@ function handleAddCardSubmit(e) {
     link: linkValue,
   };
 
-  renderCard(newCardData); // By default, uses 'prepend' method
+  renderCard(newCardData);
 
   cardForm.reset();
 
@@ -130,6 +132,8 @@ cardForm.addEventListener("submit", handleAddCardSubmit);
 
 profileEditButton.addEventListener("click", () => {
   openPopup(profileEditModal);
+  profileForm.elements["title"].value = profileTitle.textContent;
+  profileForm.elements["description"].value = profileDescription.textContent;
 });
 
 addNewCardButton.addEventListener("click", () => {
