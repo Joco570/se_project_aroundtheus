@@ -48,10 +48,6 @@ const cardTemplate = document
 
 // Universal functions
 function openPopup(popup) {
-  if (popup === profileEditModal) {
-    profileForm.elements["title"].value = profileTitle.textContent;
-    profileForm.elements["description"].value = profileDescription.textContent;
-  }
   popup.classList.add("modal_opened");
 }
 
