@@ -106,22 +106,30 @@
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
   padding: 0;
   background: transparent;
-  margin-bottom: 29.74px;
+  margin-bottom: 29.74px; /* Default margin-bottom */
 }
 
-/* Error input styles */
-.modal__input_type_error {
+/* Adjust margin when there's an error */
+.modal__input:invalid {
+  margin-bottom: 5px; /* Set margin-bottom to 5px when there is an error */
   border-bottom: 2px solid rgba(255, 0, 0, 1); /* Specific error color */
 }
 
 /* Error message styles */
-.modal__input-error {
+.modal__input:invalid + .modal__input-error {
+  display: block; /* Ensure the error message is displayed */
   font-family: "Inter", sans-serif;
   font-weight: 400;
   font-size: 12px;
   line-height: 14.52px;
-  margin-top: 5px;
+  margin-top: 5px; /* 5px space above the error message */
+  margin-bottom: 13px !important; /* 13px space below the error message with higher specificity */
   color: rgba(255, 0, 0, 1); /* Default color for errors */
+}
+
+/* Specific margin for the last error message before the save button */
+.modal__input:invalid:last-of-type + .modal__input-error {
+  margin-bottom: 31.34px !important; /* 31.34px space below the error message on the last input */
 }
 
 ::placeholder {
@@ -131,6 +139,10 @@
 
 .modal__input:last-of-type {
   margin-bottom: 48px;
+}
+
+.modal__input:invalid:last-of-type {
+  margin-bottom: 5px; /* Override margin-bottom for last input when there is an error */
 }
 
 /* Specific styles for the preview modal */

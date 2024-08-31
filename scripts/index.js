@@ -75,7 +75,15 @@ function hideInputError(inputElement, errorElement) {
 
 // Function to check input validity
 function checkInputValidity(inputElement, errorElement) {
-  if (!inputElement.validity.valid) {
+  if (inputElement.value.length === 1) {
+    inputElement.style.borderBottomColor = "rgba(255, 0, 0, 1)";
+    errorElement.textContent = `Please lengthen this text to 2 characters or more. You are currently using only 1 character.`;
+    errorElement.style.color = "rgba(255, 0, 0, 1)";
+    errorElement.style.fontFamily = "'Inter', sans-serif";
+    errorElement.style.fontWeight = "400";
+    errorElement.style.fontSize = "12px";
+    errorElement.style.lineHeight = "14.52px";
+  } else if (!inputElement.validity.valid) {
     showInputError(inputElement, errorElement);
   } else {
     hideInputError(inputElement, errorElement);
