@@ -121,6 +121,23 @@
   margin-bottom: 29.74px;
 }
 
+/* Common styles for input error messages */
+.modal__input-error {
+  display: block;
+  font-family: "Inter", sans-serif;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 14.52px;
+  color: rgba(255, 0, 0, 1);
+  margin-top: 5px;
+  margin-bottom: 13px;
+}
+
+/* Adjust margin for the last error message before the save button */
+.modal__input:last-of-type + .modal__input-error {
+  margin-bottom: 31.34px;
+}
+
 /* Adjust margin when there's an error */
 .modal__input:invalid {
   margin-bottom: 5px;
@@ -142,6 +159,18 @@
 /* Specific margin for the last error message before the save button */
 .modal__input:invalid:last-of-type + .modal__input-error {
   margin-bottom: 31.34px !important;
+}
+
+/* Specific styling for invalid input in the Add Card modal */
+#modal-add-title:invalid {
+  margin-top: 5px;
+  margin-bottom: 13px;
+}
+
+/* Adjust margin for the error message below the input */
+#modal-add-title-error {
+  margin-top: 5px;
+  margin-bottom: 13px;
 }
 
 ::placeholder {

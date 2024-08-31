@@ -55,65 +55,94 @@ const descriptionError = document.querySelector(
   "#profile-description-input-error"
 );
 
+// Add Card Form elements for validation
+const cardTitleInput = cardForm.elements["title"];
+const cardLinkInput = cardForm.elements["description"];
+const cardSaveButton = cardForm.querySelector(".modal__save");
+const cardTitleError = document.querySelector("#modal-add-title-error");
+const cardLinkError = document.querySelector("#modal-add-link-error");
+
 // Function to show input error with specific styles and message
-function showInputError(inputElement, errorElement) {
+function showInputError(inputElement, errorElement, errorMessage) {
   inputElement.style.borderBottomColor = "rgba(255, 0, 0, 1)";
-  errorElement.textContent = "Please fill out this field.";
+  errorElement.textContent = errorMessage;
   errorElement.style.color = "rgba(255, 0, 0, 1)";
   errorElement.style.fontFamily = "'Inter', sans-serif";
   errorElement.style.fontWeight = "400";
   errorElement.style.fontSize = "12px";
   errorElement.style.lineHeight = "14.52px";
+
+  // Specific margin adjustments for Add Card modal title input
+  if (inputElement.id === "modal-add-title") {
+    inputElement.style.marginTop = "5px";
+    inputElement.style.marginBottom = "13px";
+    errorElement.style.marginTop = "5px";
+    errorElement.style.marginBottom = "13px";
+  } else {
+    errorElement.style.marginTop = "5px"; // Ensure consistent spacing
+  }
 }
 
 // Function to hide input error and reset styles
 function hideInputError(inputElement, errorElement) {
-  inputElement.style.borderBottomColor = "";
+  inputElement.style.borderBottomColor = "rgba(0, 0, 0, 0.2)";
   errorElement.textContent = "";
   errorElement.style.color = "";
+  errorElement.style.marginTop = ""; // Reset margin
 }
 
 // Function to check input validity
 function checkInputValidity(inputElement, errorElement) {
-  if (inputElement.value.length === 1) {
-    inputElement.style.borderBottomColor = "rgba(255, 0, 0, 1)";
-    errorElement.textContent = `Please lengthen this text to 2 characters or more. You are currently using only 1 character.`;
-    errorElement.style.color = "rgba(255, 0, 0, 1)";
-    errorElement.style.fontFamily = "'Inter', sans-serif";
-    errorElement.style.fontWeight = "400";
-    errorElement.style.fontSize = "12px";
-    errorElement.style.lineHeight = "14.52px";
-  } else if (!inputElement.validity.valid) {
-    showInputError(inputElement, errorElement);
+  if (inputElement.validity.valueMissing) {
+    showInputError(inputElement, errorElement, "Please fill out this field.");
+  } else if (inputElement.validity.tooShort) {
+    showInputError(
+      inputElement,
+      errorElement,
+      `Please lengthen this text to ${inputElement.minLength} characters or more. You are currently using only ${inputElement.value.length} characters.`
+    );
+  } else if (
+    inputElement.validity.typeMismatch &&
+    inputElement.type === "url"
+  ) {
+    showInputError(inputElement, errorElement, "Please enter a valid URL.");
   } else {
     hideInputError(inputElement, errorElement);
   }
 }
 
 // Function to toggle the save button state
-function toggleSaveButtonState() {
-  if (profileForm.checkValidity()) {
-    saveButton.classList.remove("modal__save_disabled");
-    saveButton.disabled = false;
+function toggleSaveButtonState(form, button) {
+  if (form.checkValidity()) {
+    button.classList.remove("modal__save_disabled");
+    button.disabled = false;
   } else {
-    saveButton.classList.add("modal__save_disabled");
-    saveButton.disabled = true;
+    button.classList.add("modal__save_disabled");
+    button.disabled = true;
   }
 }
 
-// Event listeners for inputs
+// Event listeners for inputs in Profile Edit Form
 profileTitleInput.addEventListener("input", () => {
   checkInputValidity(profileTitleInput, titleError);
-  toggleSaveButtonState();
+  toggleSaveButtonState(profileForm, saveButton);
 });
 
 profileDescriptionInput.addEventListener("input", () => {
   checkInputValidity(profileDescriptionInput, descriptionError);
-  toggleSaveButtonState();
+  toggleSaveButtonState(profileForm, saveButton);
 });
 
-// Event listener for form submit
-profileForm.addEventListener("submit", handleProfileEditSubmit);
+// Event listeners for inputs in Add Card Form
+cardTitleInput.addEventListener("input", () => {
+  checkInputValidity(cardTitleInput, cardTitleError);
+  toggleSaveButtonState(cardForm, cardSaveButton);
+});
+
+cardLinkInput.addEventListener("input", () => {
+  checkInputValidity(cardLinkInput, cardLinkError);
+  toggleSaveButtonState(cardForm, cardSaveButton);
+});
 
 // Handle opening of the profile edit modal
 profileEditButton.addEventListener("click", () => {
@@ -121,7 +150,7 @@ profileEditButton.addEventListener("click", () => {
   profileForm.reset();
   hideInputError(profileTitleInput, titleError);
   hideInputError(profileDescriptionInput, descriptionError);
-  toggleSaveButtonState();
+  toggleSaveButtonState(profileForm, saveButton);
   profileTitleInput.value = profileTitle.textContent;
   profileDescriptionInput.value = profileDescription.textContent;
 });
@@ -238,27 +267,16 @@ addNewCardButton.addEventListener("click", () => {
   cardForm.reset();
 
   // Reset styles for inputs and error messages
-  const titleInput = cardForm.elements["title"];
-  const linkInput = cardForm.elements["description"];
-  const titleError = document.querySelector("#modal-add-title-error");
-  const linkError = document.querySelector("#modal-add-link-error");
-
-  // Reset input styles to default
-  titleInput.style.borderBottomColor = "rgba(0, 0, 0, 0.2)";
-  linkInput.style.borderBottomColor = "rgba(0, 0, 0, 0.2)";
-
-  // Clear error messages
-  titleError.textContent = "";
-  linkError.textContent = "";
+  hideInputError(cardTitleInput, cardTitleError);
+  hideInputError(cardLinkInput, cardLinkError);
 
   // Ensure spacing around save button is reset
-  const saveButton = cardForm.querySelector(".modal__save");
-  saveButton.classList.add("modal__save_disabled");
-  saveButton.disabled = true;
+  cardSaveButton.classList.add("modal__save_disabled");
+  cardSaveButton.disabled = true;
 
   // Reset input margins to default
-  titleInput.style.marginBottom = "29.74px";
-  linkInput.style.marginBottom = "48px";
+  cardTitleInput.style.marginBottom = "29.74px";
+  cardLinkInput.style.marginBottom = "48px";
 });
 
 // Attach event listeners for closing modals
