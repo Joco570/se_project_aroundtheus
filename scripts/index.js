@@ -46,6 +46,78 @@ const cardTemplate = document
   .querySelector("#card-template")
   .content.querySelector(".card");
 
+// Elements for validation
+const profileTitleInput = profileForm.elements["title"];
+const profileDescriptionInput = profileForm.elements["description"];
+const saveButton = profileForm.querySelector(".modal__save");
+const titleError = document.querySelector("#profile-title-input-error");
+const descriptionError = document.querySelector(
+  "#profile-description-input-error"
+);
+
+// Function to show input error with specific styles and message
+function showInputError(inputElement, errorElement) {
+  inputElement.style.borderBottomColor = "rgba(255, 0, 0, 1)";
+  errorElement.textContent = "Please fill out this field.";
+  errorElement.style.color = "rgba(255, 0, 0, 1)";
+  errorElement.style.fontFamily = "'Inter', sans-serif";
+  errorElement.style.fontWeight = "400";
+  errorElement.style.fontSize = "12px";
+  errorElement.style.lineHeight = "14.52px";
+}
+
+// Function to hide input error and reset styles
+function hideInputError(inputElement, errorElement) {
+  inputElement.style.borderBottomColor = ""; // Reset to default style
+  errorElement.textContent = "";
+  errorElement.style.color = ""; // Reset to default color
+}
+
+// Function to check input validity
+function checkInputValidity(inputElement, errorElement) {
+  if (!inputElement.validity.valid) {
+    showInputError(inputElement, errorElement);
+  } else {
+    hideInputError(inputElement, errorElement);
+  }
+}
+
+// Function to toggle the save button state
+function toggleSaveButtonState() {
+  if (profileForm.checkValidity()) {
+    saveButton.classList.remove("modal__save_disabled");
+    saveButton.disabled = false;
+  } else {
+    saveButton.classList.add("modal__save_disabled");
+    saveButton.disabled = true;
+  }
+}
+
+// Event listeners for inputs
+profileTitleInput.addEventListener("input", () => {
+  checkInputValidity(profileTitleInput, titleError);
+  toggleSaveButtonState();
+});
+
+profileDescriptionInput.addEventListener("input", () => {
+  checkInputValidity(profileDescriptionInput, descriptionError);
+  toggleSaveButtonState();
+});
+
+// Event listener for form submit
+profileForm.addEventListener("submit", handleProfileEditSubmit);
+
+// Handle opening of the profile edit modal
+profileEditButton.addEventListener("click", () => {
+  openPopup(profileEditModal);
+  profileForm.reset();
+  hideInputError(profileTitleInput, titleError);
+  hideInputError(profileDescriptionInput, descriptionError);
+  toggleSaveButtonState();
+  profileTitleInput.value = profileTitle.textContent;
+  profileDescriptionInput.value = profileDescription.textContent;
+});
+
 // Universal functions
 function openPopup(popup) {
   popup.classList.add("modal_opened");

@@ -66,6 +66,12 @@
   opacity: 80%;
 }
 
+/* Disabled save button styles */
+.modal__save_disabled {
+  background-color: grey; /* Use the color from your Figma design */
+  cursor: not-allowed;
+}
+
 /* Close button styles */
 .modal__close {
   background-image: url("../images/Close.svg");
@@ -101,6 +107,21 @@
   padding: 0;
   background: transparent;
   margin-bottom: 29.74px;
+}
+
+/* Error input styles */
+.modal__input_type_error {
+  border-bottom: 2px solid rgba(255, 0, 0, 1); /* Specific error color */
+}
+
+/* Error message styles */
+.modal__input-error {
+  font-family: "Inter", sans-serif;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 14.52px;
+  margin-top: 5px;
+  color: rgba(255, 0, 0, 1); /* Default color for errors */
 }
 
 ::placeholder {

@@ -50,22 +50,48 @@
         <button class="modal__close" id="modal-close-button"></button>
         <p class="modal__header">Edit Profile</p>
 
-        <form class="modal__form" id="profile-edit-form" name="profile-form">
+        <form
+          class="modal__form"
+          id="profile-edit-form"
+          name="profile-form"
+          novalidate
+        >
           <input
             type="text"
             name="title"
             id="profile-title-input"
             placeholder="Name"
             class="modal__input"
+            minlength="2"
+            maxlength="40"
+            required
           />
+          <span
+            class="modal__input-error"
+            id="profile-title-input-error"
+          ></span>
+
           <input
             type="text"
             name="description"
             id="profile-description-input"
-            placeholder="Description"
+            placeholder="About"
             class="modal__input"
+            minlength="2"
+            maxlength="200"
+            required
           />
-          <button class="modal__save" id="modal-save-button" type="submit">
+          <span
+            class="modal__input-error"
+            id="profile-description-input-error"
+          ></span>
+
+          <button
+            class="modal__save modal__save_disabled"
+            id="modal-save-button"
+            type="submit"
+            disabled
+          >
             Save
           </button>
         </form>
@@ -93,7 +119,13 @@
             placeholder="Image Link"
             class="modal__input"
           />
-          <button class="modal__save" id="modal-save-button" type="submit">
+          <span class="modal__input-error" id="modal-add-link-error"></span>
+          <button
+            class="modal__save modal__save_disabled"
+            id="modal-save-button"
+            type="submit"
+            disabled
+          >
             Create
           </button>
         </form>
