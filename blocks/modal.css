@@ -26,7 +26,7 @@
 .modal__container {
   display: flex;
   flex-direction: column;
-  background-color: rgba(255, 255, 255, 1);
+  background-color: rgba(255, 255, 255, 1); /* Background color for modal */
   margin: auto;
   padding: 36px;
   border-radius: 10px;
@@ -66,9 +66,17 @@
   opacity: 80%;
 }
 
+/* Adjusted save button styles when an error is present */
+.modal__input:invalid ~ .modal__save {
+  background-color: rgba(255, 255, 255, 1);
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  color: rgba(0, 0, 0, 0.2);
+}
+
 /* Disabled save button styles */
 .modal__save_disabled {
-  background-color: grey; /* Use the color from your Figma design */
+  background-color: rgba(0, 0, 0, 0.8);
+
   cursor: not-allowed;
 }
 
