@@ -161,16 +161,27 @@
   margin-bottom: 31.34px !important;
 }
 
-/* Specific styling for invalid input in the Add Card modal */
+/* Specific styling for invalid input in the Add Card modal's title */
 #modal-add-title:invalid {
   margin-top: 5px;
   margin-bottom: 13px;
 }
 
-/* Adjust margin for the error message below the input */
+/* Adjust margin for the error message below the title input */
 #modal-add-title-error {
   margin-top: 5px;
   margin-bottom: 13px;
+}
+
+/* Specific styling for invalid input in the Add Card modal's URL */
+#modal-add-link:invalid {
+  margin-bottom: 0; /* Remove bottom margin */
+}
+
+/* Adjust margin for the error message below the URL input */
+#modal-add-link-error {
+  margin-top: 5px;
+  margin-bottom: 31.34px;
 }
 
 ::placeholder {

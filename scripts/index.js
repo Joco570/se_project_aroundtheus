@@ -72,14 +72,18 @@ function showInputError(inputElement, errorElement, errorMessage) {
   errorElement.style.fontSize = "12px";
   errorElement.style.lineHeight = "14.52px";
 
-  // Specific margin adjustments for Add Card modal title input
+  // Specific margin adjustments for Add Card modal inputs
   if (inputElement.id === "modal-add-title") {
     inputElement.style.marginTop = "5px";
     inputElement.style.marginBottom = "13px";
     errorElement.style.marginTop = "5px";
     errorElement.style.marginBottom = "13px";
+  } else if (inputElement.id === "modal-add-link") {
+    inputElement.style.marginBottom = "0";
+    errorElement.style.marginTop = "5px";
+    errorElement.style.marginBottom = "31.34px";
   } else {
-    errorElement.style.marginTop = "5px"; // Ensure consistent spacing
+    errorElement.style.marginTop = "5px";
   }
 }
 
@@ -87,8 +91,11 @@ function showInputError(inputElement, errorElement, errorMessage) {
 function hideInputError(inputElement, errorElement) {
   inputElement.style.borderBottomColor = "rgba(0, 0, 0, 0.2)";
   errorElement.textContent = "";
-  errorElement.style.color = "";
-  errorElement.style.marginTop = ""; // Reset margin
+  // Reset margins
+  inputElement.style.marginTop = "";
+  inputElement.style.marginBottom = "";
+  errorElement.style.marginTop = "";
+  errorElement.style.marginBottom = "";
 }
 
 // Function to check input validity
