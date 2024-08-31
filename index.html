@@ -104,29 +104,41 @@
         <button class="modal__close" id="modal-close-button"></button>
         <p class="modal__header">New Place</p>
 
-        <form class="modal__form" id="profile-add-form" name="card-form">
+        <form
+          class="modal__form"
+          id="profile-add-form"
+          name="card-form"
+          novalidate
+        >
           <input
             type="text"
             name="title"
             id="modal-add-title"
             placeholder="Title"
             class="modal__input"
+            minlength="1"
+            maxlength="30"
+            required
           />
+          <span class="modal__input-error" id="modal-add-title-error"></span>
+
           <input
-            type="text"
+            type="url"
             name="description"
             id="modal-add-link"
             placeholder="Image Link"
             class="modal__input"
+            required
           />
           <span class="modal__input-error" id="modal-add-link-error"></span>
+
           <button
             class="modal__save modal__save_disabled"
             id="modal-save-button"
             type="submit"
             disabled
           >
-            Create
+            Save
           </button>
         </form>
       </div>

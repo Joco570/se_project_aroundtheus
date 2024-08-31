@@ -68,9 +68,9 @@ function showInputError(inputElement, errorElement) {
 
 // Function to hide input error and reset styles
 function hideInputError(inputElement, errorElement) {
-  inputElement.style.borderBottomColor = ""; // Reset to default style
+  inputElement.style.borderBottomColor = "";
   errorElement.textContent = "";
-  errorElement.style.color = ""; // Reset to default color
+  errorElement.style.color = "";
 }
 
 // Function to check input validity
@@ -233,6 +233,32 @@ profileEditButton.addEventListener("click", () => {
 
 addNewCardButton.addEventListener("click", () => {
   openPopup(profileAddModal);
+
+  // Reset the form inputs and errors
+  cardForm.reset();
+
+  // Reset styles for inputs and error messages
+  const titleInput = cardForm.elements["title"];
+  const linkInput = cardForm.elements["description"];
+  const titleError = document.querySelector("#modal-add-title-error");
+  const linkError = document.querySelector("#modal-add-link-error");
+
+  // Reset input styles to default
+  titleInput.style.borderBottomColor = "rgba(0, 0, 0, 0.2)";
+  linkInput.style.borderBottomColor = "rgba(0, 0, 0, 0.2)";
+
+  // Clear error messages
+  titleError.textContent = "";
+  linkError.textContent = "";
+
+  // Ensure spacing around save button is reset
+  const saveButton = cardForm.querySelector(".modal__save");
+  saveButton.classList.add("modal__save_disabled");
+  saveButton.disabled = true;
+
+  // Reset input margins to default
+  titleInput.style.marginBottom = "29.74px";
+  linkInput.style.marginBottom = "48px";
 });
 
 // Attach event listeners for closing modals
@@ -253,5 +279,5 @@ modals.forEach((modal) => {
 
 // Initialize Cards
 initialCards.forEach((cardData) => {
-  renderCard(cardData, "append"); // Uses 'append' method to add initial cards
+  renderCard(cardData, "append");
 });

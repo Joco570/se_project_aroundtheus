@@ -8,8 +8,8 @@
   z-index: 999;
   background-color: rgba(0, 0, 0, 0.5);
   display: flex;
-  align-items: center; /* Center content vertically */
-  justify-content: center; /* Center content horizontally */
+  align-items: center;
+  justify-content: center;
   padding: 0 19px;
   opacity: 0;
   visibility: hidden;
@@ -26,7 +26,7 @@
 .modal__container {
   display: flex;
   flex-direction: column;
-  background-color: rgba(255, 255, 255, 1); /* Background color for modal */
+  background-color: rgba(255, 255, 255, 1);
   margin: auto;
   padding: 36px;
   border-radius: 10px;
@@ -68,7 +68,12 @@
 
 /* Adjusted save button styles when an error is present */
 .modal__input:invalid ~ .modal__save {
-  background-color: rgba(255, 255, 255, 1);
+  background-color: rgba(
+    255,
+    255,
+    255,
+    1
+  ); /* Same background color as the modal */
   border: 1px solid rgba(0, 0, 0, 0.2);
   color: rgba(0, 0, 0, 0.2);
 }
@@ -76,7 +81,6 @@
 /* Disabled save button styles */
 .modal__save_disabled {
   background-color: rgba(0, 0, 0, 0.8);
-
   cursor: not-allowed;
 }
 
@@ -114,30 +118,30 @@
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
   padding: 0;
   background: transparent;
-  margin-bottom: 29.74px; /* Default margin-bottom */
+  margin-bottom: 29.74px;
 }
 
 /* Adjust margin when there's an error */
 .modal__input:invalid {
-  margin-bottom: 5px; /* Set margin-bottom to 5px when there is an error */
-  border-bottom: 2px solid rgba(255, 0, 0, 1); /* Specific error color */
+  margin-bottom: 5px;
+  border-bottom: 2px solid rgba(255, 0, 0, 1);
 }
 
 /* Error message styles */
 .modal__input:invalid + .modal__input-error {
-  display: block; /* Ensure the error message is displayed */
+  display: block;
   font-family: "Inter", sans-serif;
   font-weight: 400;
   font-size: 12px;
   line-height: 14.52px;
-  margin-top: 5px; /* 5px space above the error message */
-  margin-bottom: 13px !important; /* 13px space below the error message with higher specificity */
-  color: rgba(255, 0, 0, 1); /* Default color for errors */
+  margin-top: 5px;
+  margin-bottom: 13px !important;
+  color: rgba(255, 0, 0, 1);
 }
 
 /* Specific margin for the last error message before the save button */
 .modal__input:invalid:last-of-type + .modal__input-error {
-  margin-bottom: 31.34px !important; /* 31.34px space below the error message on the last input */
+  margin-bottom: 31.34px !important;
 }
 
 ::placeholder {
@@ -150,7 +154,7 @@
 }
 
 .modal__input:invalid:last-of-type {
-  margin-bottom: 5px; /* Override margin-bottom for last input when there is an error */
+  margin-bottom: 5px;
 }
 
 /* Specific styles for the preview modal */
