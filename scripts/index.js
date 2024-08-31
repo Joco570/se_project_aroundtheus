@@ -48,13 +48,28 @@ const cardTemplate = document
 
 // Universal functions
 function openPopup(popup) {
-  if (popup === profileEditModal) {
-  }
   popup.classList.add("modal_opened");
 }
 
 function closePopUp(modal) {
   modal.classList.remove("modal_opened");
+}
+
+// Function to close the popup on ESC key press
+function handleEscClose(evt) {
+  if (evt.key === "Escape") {
+    const openModal = document.querySelector(".modal_opened");
+    if (openModal) {
+      closePopUp(openModal);
+    }
+  }
+}
+
+// Function to close the popup when clicking on the overlay
+function handleOverlayClick(evt) {
+  if (evt.target.classList.contains("modal_opened")) {
+    closePopUp(evt.target);
+  }
 }
 
 function createCardElement(cardData) {
@@ -140,10 +155,20 @@ addNewCardButton.addEventListener("click", () => {
   openPopup(profileAddModal);
 });
 
+// Attach event listeners for closing modals
 modalCloseButtons.forEach((button) => {
   button.addEventListener("click", () => {
     closePopUp(button.closest(".modal"));
   });
+});
+
+// Add event listener to document for ESC key
+document.addEventListener("keydown", handleEscClose);
+
+// Add event listener to all modals for overlay click
+const modals = document.querySelectorAll(".modal");
+modals.forEach((modal) => {
+  modal.addEventListener("click", handleOverlayClick);
 });
 
 // Initialize Cards
