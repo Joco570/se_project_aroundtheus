@@ -32,7 +32,7 @@
   border-radius: 10px;
   position: relative;
   width: 358px;
-  height: 259.5px;
+  height: auto; /* Adjust height based on content */
 }
 
 /* Header styles */
@@ -49,8 +49,8 @@
 /* Save button styles */
 .modal__save {
   height: 50.15px;
-  width: 358px;
-  margin: 0;
+  width: 100%;
+  margin-top: 24px;
   border: 1px solid white;
   cursor: pointer;
   background-color: black;
@@ -103,79 +103,55 @@
   opacity: 60%;
 }
 
+/* Container for input and error message */
+.modal__input-container {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
 /* Input styles */
 .modal__input {
-  display: block;
-  width: 358px;
+  width: 100%;
   height: 27.26px;
   font-size: 14px;
   font-weight: 400;
   line-height: 16.94px;
   color: black;
   border: none;
-  box-shadow: none;
-  outline: none;
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
   padding: 0;
   background: transparent;
-  margin-bottom: 29.74px;
 }
 
-/* Common styles for input error messages */
+/* Error message styles */
 .modal__input-error {
-  display: block;
   font-family: "Inter", sans-serif;
   font-weight: 400;
   font-size: 12px;
   line-height: 14.52px;
   color: rgba(255, 0, 0, 1);
+  visibility: hidden;
+  height: 14px;
   margin-top: 5px;
-  margin-bottom: 13px;
 }
 
-/* Adjust margin for the last error message before the save button */
+.modal__input-container .modal__input-error_visible {
+  visibility: visible;
+}
+
+/* Specific margin for the last error message before the save button */
 .modal__input:last-of-type + .modal__input-error {
   margin-bottom: 31.34px;
 }
 
-/* Adjust margin when there's an error */
+/* Error message styles for invalid inputs */
 .modal__input:invalid {
-  margin-bottom: 5px;
   border-bottom: 2px solid rgba(255, 0, 0, 1);
 }
 
-/* Error message styles */
 .modal__input:invalid + .modal__input-error {
-  display: block;
-  font-family: "Inter", sans-serif;
-  font-weight: 400;
-  font-size: 12px;
-  line-height: 14.52px;
-  margin-top: 5px;
-  margin-bottom: 13px !important;
-  color: rgba(255, 0, 0, 1);
-}
-
-/* Specific margin for the last error message before the save button */
-.modal__input:invalid:last-of-type + .modal__input-error {
-  margin-bottom: 31.34px !important;
-}
-
-/* Specific styling for invalid input in the Add Card modal's title */
-#modal-add-title:invalid {
-  margin-top: 5px;
-  margin-bottom: 13px;
-}
-
-/* Adjust margin for the error message below the title input */
-#modal-add-title-error {
-  margin-top: 5px;
-  margin-bottom: 13px;
-}
-
-/* Specific styling for invalid input in the Add Card modal's URL */
-#modal-add-link:invalid {
-  margin-bottom: 0; /* Remove bottom margin */
+  visibility: visible;
 }
 
 /* Adjust margin for the error message below the URL input */
@@ -187,14 +163,6 @@
 ::placeholder {
   color: rgba(196, 196, 196, 1);
   opacity: 1;
-}
-
-.modal__input:last-of-type {
-  margin-bottom: 48px;
-}
-
-.modal__input:invalid:last-of-type {
-  margin-bottom: 5px;
 }
 
 /* Specific styles for the preview modal */
@@ -259,10 +227,6 @@
 
   .modal__input {
     width: calc(100% - 16px);
-  }
-
-  .modal__input:last-of-type {
-    margin-bottom: 45px;
   }
 
   .modal__save {

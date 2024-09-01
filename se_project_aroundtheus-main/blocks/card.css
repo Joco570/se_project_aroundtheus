@@ -1,0 +1,67 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  max-width: 282px;
+  margin: auto;
+  position: relative; /* Ensure the card is the positioning context for the delete button */
+}
+
+.card__image {
+  height: 282px;
+  width: 282px;
+  border-radius: 10px 10px 0 0;
+  margin: 0;
+  cursor: pointer;
+}
+
+.card__description {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: black;
+  background-color: white;
+  border-radius: 0 0 10px 10px;
+  padding: 25px 20px;
+}
+
+.card__title {
+  max-width: 219px;
+  font-size: 24px;
+  font-weight: 900;
+  line-height: 29.05px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  margin: 0;
+}
+
+.card__like-button {
+  background: transparent url(../images/like-inactive.svg) center no-repeat;
+  width: 21px;
+  height: 18px;
+  border: none;
+  cursor: pointer;
+}
+
+.card__like-button:hover {
+  background: transparent url(../images/like-active.svg) center no-repeat;
+}
+
+.card__like-button_active {
+  background: transparent url(../images/like-liked.svg) center no-repeat;
+}
+
+.card__delete-button {
+  position: absolute;
+  top: 18px;
+  right: 15px;
+  background: transparent url(../images/Delete-icon.svg) center no-repeat;
+  width: 18px;
+  height: 19.3px;
+  border: none;
+  cursor: pointer;
+}
+
+.card__delete-button:hover {
+  opacity: 60%;
+}
