@@ -1,15 +1,18 @@
+// Function to show input error
 function showInputError(inputElement, errorElement, errorMessage, config) {
   inputElement.classList.add(config.inputErrorClass);
   errorElement.textContent = errorMessage;
   errorElement.classList.add(config.errorClass);
 }
 
+// Function to hide input error
 function hideInputError(inputElement, errorElement, config) {
   inputElement.classList.remove(config.inputErrorClass);
   errorElement.classList.remove(config.errorClass);
   errorElement.textContent = "";
 }
 
+// Function to check input validity
 function checkInputValidity(inputElement, config) {
   const errorElement = document.querySelector(`#${inputElement.id}-error`);
   if (inputElement.validity.valueMissing) {
@@ -41,6 +44,7 @@ function checkInputValidity(inputElement, config) {
   }
 }
 
+// Function to toggle the state of the submit button
 function toggleButtonState(inputList, buttonElement, config) {
   const isValid = inputList.every(
     (inputElement) => inputElement.validity.valid
@@ -54,6 +58,7 @@ function toggleButtonState(inputList, buttonElement, config) {
   }
 }
 
+// Function to set event listeners on form inputs
 function setEventListeners(formElement, config) {
   const inputList = Array.from(
     formElement.querySelectorAll(config.inputSelector)
@@ -68,6 +73,7 @@ function setEventListeners(formElement, config) {
   });
 }
 
+// Function to enable validation on all forms
 function enableValidation(config) {
   const formList = Array.from(document.querySelectorAll(config.formSelector));
   formList.forEach((formElement) => {
@@ -75,12 +81,12 @@ function enableValidation(config) {
   });
 }
 
-// Call enableValidation with the configuration object
-enableValidation({
-  formSelector: ".modal__form",
-  inputSelector: ".modal__input",
-  submitButtonSelector: ".modal__save",
-  inactiveButtonClass: "modal__save_disabled",
-  inputErrorClass: "modal__input_type_error",
-  errorClass: "modal__input-error_visible",
-});
+// Exporting the functions to be used in other modules like index.js
+export {
+  showInputError,
+  hideInputError,
+  checkInputValidity,
+  toggleButtonState,
+  setEventListeners,
+  enableValidation,
+};

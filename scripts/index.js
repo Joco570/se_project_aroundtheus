@@ -1,31 +1,3 @@
-// Data
-const initialCards = [
-  {
-    name: `Yosemite Valley`,
-    link: `https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/yosemite.jpg`,
-  },
-  {
-    name: `Lake Louise`,
-    link: `https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/lake-louise.jpg`,
-  },
-  {
-    name: `Bald Mountains`,
-    link: `https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/bald-mountains.jpg`,
-  },
-  {
-    name: `Latemar`,
-    link: `https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/latemar.jpg`,
-  },
-  {
-    name: `Vanoise National Park`,
-    link: `https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/vanoise.jpg`,
-  },
-  {
-    name: `Lago di Braies`,
-    link: `https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/lago.jpg`,
-  },
-];
-
 // Elements
 const profileEditButton = document.querySelector("#profile-edit-button");
 const profileEditModal = document.querySelector("#Profile-Edit-Modal");
@@ -40,6 +12,8 @@ const previewImage = previewModal.querySelector(".modal__image");
 const previewCaption = previewModal.querySelector("#modal-caption");
 
 // Elements for validation
+const profileForm = document.forms["profile-form"];
+const cardForm = document.forms["card-form"];
 const profileTitleInput = profileForm.elements["title"];
 const profileDescriptionInput = profileForm.elements["description"];
 const saveButton = profileForm.querySelector(".modal__save");
@@ -54,9 +28,6 @@ const cardSaveButton = cardForm.querySelector(".modal__save");
 const cardTitleError = document.querySelector("#modal-add-title-error");
 const cardLinkError = document.querySelector("#modal-add-link-error");
 
-// Accessing forms using document.forms
-const profileForm = document.forms["profile-form"];
-const cardForm = document.forms["card-form"];
 const cardTemplate = document
   .querySelector("#card-template")
   .content.querySelector(".card");
@@ -135,35 +106,16 @@ function renderCard(item, method = "prepend") {
   cardListElement[method](cardElement);
 }
 
-// Event Handlers
-function handleProfileEditSubmit(e) {
-  e.preventDefault();
-  profileTitle.textContent = profileForm.elements["title"].value;
-  profileDescription.textContent = profileForm.elements["description"].value;
-  closePopUp(profileEditModal);
-}
-
-function handleAddCardSubmit(e) {
-  e.preventDefault();
-  const titleValue = cardForm.elements["title"].value;
-  const linkValue = cardForm.elements["description"].value;
-  if (!titleValue || !linkValue) {
-    console.log("Both title and link are required.");
-    return;
-  }
-  const newCardData = {
-    name: titleValue,
-    link: linkValue,
-  };
-
-  renderCard(newCardData);
-
-  cardForm.reset();
-
-  closePopUp(profileAddModal);
-}
-
 // Attach event listeners to the forms
+enableValidation({
+  formSelector: ".modal__form",
+  inputSelector: ".modal__input",
+  submitButtonSelector: ".modal__save",
+  inactiveButtonClass: "modal__save_disabled",
+  inputErrorClass: "modal__input_type_error",
+  errorClass: "modal__input-error_visible",
+});
+
 profileForm.addEventListener("submit", handleProfileEditSubmit);
 cardForm.addEventListener("submit", handleAddCardSubmit);
 
@@ -179,17 +131,17 @@ addNewCardButton.addEventListener("click", () => {
   // Reset the form inputs and errors
   cardForm.reset();
 
-  // Reset styles for inputs and error messages
-  hideInputError(cardTitleInput, cardTitleError);
-  hideInputError(cardLinkInput, cardLinkError);
+  // Reset styles for inputs and error messages using the config from validate.js
+  const config = {
+    inputErrorClass: "modal__input_type_error",
+    errorClass: "modal__input-error_visible",
+  };
+  hideInputError(cardTitleInput, cardTitleError, config);
+  hideInputError(cardLinkInput, cardLinkError, config);
 
   // Ensure spacing around save button is reset
   cardSaveButton.classList.add("modal__save_disabled");
   cardSaveButton.disabled = true;
-
-  // Reset input margins to default
-  cardTitleInput.style.marginBottom = "29.74px";
-  cardLinkInput.style.marginBottom = "48px";
 });
 
 // Attach event listeners for closing modals
