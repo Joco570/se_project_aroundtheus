@@ -1,18 +1,3 @@
-// Elements for validation
-const profileTitleInput = profileForm.elements["title"];
-const profileDescriptionInput = profileForm.elements["description"];
-const saveButton = profileForm.querySelector(".modal__save");
-const titleError = document.querySelector("#profile-title-input-error");
-const descriptionError = document.querySelector(
-  "#profile-description-input-error"
-);
-// Add Card Form elements for validation
-const cardTitleInput = cardForm.elements["title"];
-const cardLinkInput = cardForm.elements["description"];
-const cardSaveButton = cardForm.querySelector(".modal__save");
-const cardTitleError = document.querySelector("#modal-add-title-error");
-const cardLinkError = document.querySelector("#modal-add-link-error");
-
 // Function to check input validity
 function checkInputValidity(inputElement, errorElement) {
   if (inputElement.validity.valueMissing) {
