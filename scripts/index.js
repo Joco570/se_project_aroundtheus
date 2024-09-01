@@ -39,6 +39,21 @@ const previewModal = document.querySelector("#Preview-Modal");
 const previewImage = previewModal.querySelector(".modal__image");
 const previewCaption = previewModal.querySelector("#modal-caption");
 
+// Elements for validation
+const profileTitleInput = profileForm.elements["title"];
+const profileDescriptionInput = profileForm.elements["description"];
+const saveButton = profileForm.querySelector(".modal__save");
+const titleError = document.querySelector("#profile-title-input-error");
+const descriptionError = document.querySelector(
+  "#profile-description-input-error"
+);
+// Add Card Form elements for validation
+const cardTitleInput = cardForm.elements["title"];
+const cardLinkInput = cardForm.elements["description"];
+const cardSaveButton = cardForm.querySelector(".modal__save");
+const cardTitleError = document.querySelector("#modal-add-title-error");
+const cardLinkError = document.querySelector("#modal-add-link-error");
+
 // Accessing forms using document.forms
 const profileForm = document.forms["profile-form"];
 const cardForm = document.forms["card-form"];
@@ -46,60 +61,20 @@ const cardTemplate = document
   .querySelector("#card-template")
   .content.querySelector(".card");
 
-// Function to show input error with specific styles and message
-function showInputError(inputElement, errorElement, errorMessage) {
-  inputElement.style.borderBottomColor = "rgba(255, 0, 0, 1)";
-  errorElement.textContent = errorMessage;
-  errorElement.style.color = "rgba(255, 0, 0, 1)";
-  errorElement.style.fontFamily = "'Inter', sans-serif";
-  errorElement.style.fontWeight = "400";
-  errorElement.style.fontSize = "12px";
-  errorElement.style.lineHeight = "14.52px";
-
-  // Specific margin adjustments for Add Card modal inputs
-  if (inputElement.id === "modal-add-title") {
-    inputElement.style.marginTop = "5px";
-    inputElement.style.marginBottom = "13px";
-    errorElement.style.marginTop = "5px";
-    errorElement.style.marginBottom = "13px";
-  } else if (inputElement.id === "modal-add-link") {
-    inputElement.style.marginBottom = "0";
-    errorElement.style.marginTop = "5px";
-    errorElement.style.marginBottom = "31.34px";
-  } else {
-    errorElement.style.marginTop = "5px";
-  }
-}
-
-// Function to hide input error and reset styles
-function hideInputError(inputElement, errorElement) {
-  inputElement.style.borderBottomColor = "rgba(0, 0, 0, 0.2)";
-  errorElement.textContent = "";
-  // Reset margins
-  inputElement.style.marginTop = "";
-  inputElement.style.marginBottom = "";
-  errorElement.style.marginTop = "";
-  errorElement.style.marginBottom = "";
-}
-
-// Handle opening of the profile edit modal
-profileEditButton.addEventListener("click", () => {
-  openPopup(profileEditModal);
-  profileForm.reset();
-  hideInputError(profileTitleInput, titleError);
-  hideInputError(profileDescriptionInput, descriptionError);
-  toggleSaveButtonState(profileForm, saveButton);
-  profileTitleInput.value = profileTitle.textContent;
-  profileDescriptionInput.value = profileDescription.textContent;
-});
-
-// Universal functions
+// Function to open popup and add ESC key listener
 function openPopup(popup) {
   popup.classList.add("modal_opened");
+
+  // Add event listener for ESC key when popup is opened
+  document.addEventListener("keydown", handleEscClose);
 }
 
+// Function to close popup and remove ESC key listener
 function closePopUp(modal) {
   modal.classList.remove("modal_opened");
+
+  // Remove event listener for ESC key when popup is closed
+  document.removeEventListener("keydown", handleEscClose);
 }
 
 // Function to close the popup on ESC key press
@@ -223,9 +198,6 @@ modalCloseButtons.forEach((button) => {
     closePopUp(button.closest(".modal"));
   });
 });
-
-// Add event listener to document for ESC key
-document.addEventListener("keydown", handleEscClose);
 
 // Add event listener to all modals for overlay click
 const modals = document.querySelectorAll(".modal");
