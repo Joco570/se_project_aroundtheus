@@ -115,15 +115,20 @@
   border: none;
   box-shadow: none;
   outline: none;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2); /* Neutral border */
   padding: 0;
   background: transparent;
   margin-bottom: 29.74px;
 }
 
+/* Invalid input styles, initially hidden */
+.modal__input.invalid {
+  border-bottom: 2px solid rgba(255, 0, 0, 1); /* Red border on invalid input */
+}
+
 /* Common styles for input error messages */
 .modal__input-error {
-  display: block;
+  display: none; /* Initially hidden */
   font-family: "Inter", sans-serif;
   font-weight: 400;
   font-size: 12px;
@@ -131,6 +136,11 @@
   color: rgba(255, 0, 0, 1);
   margin-top: 5px;
   margin-bottom: 13px;
+}
+
+/* Error message visible when input is invalid */
+.modal__input-error_active {
+  display: block;
 }
 
 /* Adjust margin for the last error message before the save button */
@@ -141,19 +151,6 @@
 /* Adjust margin when there's an error */
 .modal__input:invalid {
   margin-bottom: 5px;
-  border-bottom: 2px solid rgba(255, 0, 0, 1);
-}
-
-/* Error message styles */
-.modal__input:invalid + .modal__input-error {
-  display: block;
-  font-family: "Inter", sans-serif;
-  font-weight: 400;
-  font-size: 12px;
-  line-height: 14.52px;
-  margin-top: 5px;
-  margin-bottom: 13px !important;
-  color: rgba(255, 0, 0, 1);
 }
 
 /* Specific margin for the last error message before the save button */

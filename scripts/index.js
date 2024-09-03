@@ -61,40 +61,18 @@ const cardSaveButton = cardForm.querySelector(".modal__save");
 const cardTitleError = document.querySelector("#modal-add-title-error");
 const cardLinkError = document.querySelector("#modal-add-link-error");
 
-// Function to show input error with specific styles and message
+// Function to show input error by adding a class
 function showInputError(inputElement, errorElement, errorMessage) {
-  inputElement.style.borderBottomColor = "rgba(255, 0, 0, 1)";
+  inputElement.classList.add("invalid"); // Add the invalid class to show the red border
   errorElement.textContent = errorMessage;
-  errorElement.style.color = "rgba(255, 0, 0, 1)";
-  errorElement.style.fontFamily = "'Inter', sans-serif";
-  errorElement.style.fontWeight = "400";
-  errorElement.style.fontSize = "12px";
-  errorElement.style.lineHeight = "14.52px";
-
-  // Specific margin adjustments for Add Card modal inputs
-  if (inputElement.id === "modal-add-title") {
-    inputElement.style.marginTop = "5px";
-    inputElement.style.marginBottom = "13px";
-    errorElement.style.marginTop = "5px";
-    errorElement.style.marginBottom = "13px";
-  } else if (inputElement.id === "modal-add-link") {
-    inputElement.style.marginBottom = "0";
-    errorElement.style.marginTop = "5px";
-    errorElement.style.marginBottom = "31.34px";
-  } else {
-    errorElement.style.marginTop = "5px";
-  }
+  errorElement.classList.add("modal__input-error_active"); // Add class to display error message
 }
 
-// Function to hide input error and reset styles
+// Function to hide input error by removing the class
 function hideInputError(inputElement, errorElement) {
-  inputElement.style.borderBottomColor = "rgba(0, 0, 0, 0.2)";
+  inputElement.classList.remove("invalid"); // Remove the invalid class to hide the red border
   errorElement.textContent = "";
-  // Reset margins
-  inputElement.style.marginTop = "";
-  inputElement.style.marginBottom = "";
-  errorElement.style.marginTop = "";
-  errorElement.style.marginBottom = "";
+  errorElement.classList.remove("modal__input-error_active"); // Remove class to hide error message
 }
 
 // Handle opening of the profile edit modal
@@ -252,3 +230,58 @@ modals.forEach((modal) => {
 initialCards.forEach((cardData) => {
   renderCard(cardData, "append");
 });
+
+// Function to check input validity
+function checkInputValidity(inputElement, errorElement) {
+  if (inputElement.validity.valueMissing) {
+    showInputError(inputElement, errorElement, "Please fill out this field.");
+  } else if (inputElement.validity.tooShort) {
+    showInputError(
+      inputElement,
+      errorElement,
+      `Please lengthen this text to ${inputElement.minLength} characters or more. You are currently using only ${inputElement.value.length} characters.`
+    );
+  } else if (
+    inputElement.validity.typeMismatch &&
+    inputElement.type === "url"
+  ) {
+    showInputError(inputElement, errorElement, "Please enter a valid URL.");
+  } else {
+    hideInputError(inputElement, errorElement);
+  }
+}
+
+// Event listeners for inputs in Profile Edit Form
+profileTitleInput.addEventListener("input", () => {
+  checkInputValidity(profileTitleInput, titleError);
+  toggleSaveButtonState(profileForm, saveButton);
+});
+
+profileDescriptionInput.addEventListener("input", () => {
+  checkInputValidity(profileDescriptionInput, descriptionError);
+  toggleSaveButtonState(profileForm, saveButton);
+});
+
+// Event listeners for inputs in Add Card Form
+cardTitleInput.addEventListener("input", () => {
+  cardTitleInput.classList.add("invalid"); // Start showing validation styles after typing
+  checkInputValidity(cardTitleInput, cardTitleError);
+  toggleSaveButtonState(cardForm, cardSaveButton);
+});
+
+cardLinkInput.addEventListener("input", () => {
+  cardLinkInput.classList.add("invalid"); // Start showing validation styles after typing
+  checkInputValidity(cardLinkInput, cardLinkError);
+  toggleSaveButtonState(cardForm, cardSaveButton);
+});
+
+// Function to toggle the save button state
+function toggleSaveButtonState(form, button) {
+  if (form.checkValidity()) {
+    button.classList.remove("modal__save_disabled");
+    button.disabled = false;
+  } else {
+    button.classList.add("modal__save_disabled");
+    button.disabled = true;
+  }
+}
