@@ -65,12 +65,14 @@ const cardLinkError = document.querySelector("#modal-add-link-error");
 function openPopup(popup) {
   popup.classList.add("modal_opened");
 
+  // Add esc key handler only when a modal is opened
+  document.addEventListener("keydown", handleEscClose);
+
   // Reset all input fields and error messages for the modal being opened
   const form = popup.querySelector("form");
   if (form) {
     form.reset();
 
-    // Hide error messages and reset input styles
     const inputs = form.querySelectorAll(".modal__input");
     const errorMessages = form.querySelectorAll(".modal__input-error");
 
@@ -79,7 +81,6 @@ function openPopup(popup) {
       hideInputError(input, errorElement);
     });
 
-    // Run validation to set the save button state on opening
     const saveButton = form.querySelector(".modal__save");
     toggleSaveButtonState(form, saveButton);
   }
@@ -87,6 +88,9 @@ function openPopup(popup) {
 
 function closePopUp(modal) {
   modal.classList.remove("modal_opened");
+
+  // Remove esc key handler when the modal is closed
+  document.removeEventListener("keydown", handleEscClose);
 }
 
 // Function to close the popup on ESC key press
