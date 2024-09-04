@@ -164,11 +164,6 @@
   display: block;
 }
 
-/* Adjust the wrapper height to account for potential two-line error messages */
-.modal__input-wrapper.error-visible {
-  margin-bottom: 44px; /* Increased space to accommodate a two-line error message */
-}
-
 /* Preview modal container styles */
 .modal__container--preview {
   border: none;

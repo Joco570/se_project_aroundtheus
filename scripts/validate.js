@@ -20,13 +20,12 @@ function checkInputValidity(inputElement, errorElement) {
 
 // Function to show input error by adding a class
 function showInputError(inputElement, errorElement, errorMessage) {
-  inputElement.classList.add("invalid"); // Add the invalid class to show the red border
+  inputElement.classList.add("invalid");
   errorElement.textContent = errorMessage;
-  errorElement.classList.add("modal__input-error_active"); // Add class to display error message
+  errorElement.classList.add("modal__input-error_active");
 
   const wrapper = inputElement.closest(".modal__input-wrapper");
   if (errorMessage.length > 40) {
-    // Arbitrary length check for long error messages
     wrapper.classList.add("error-visible");
   } else {
     wrapper.classList.remove("error-visible");
@@ -35,9 +34,9 @@ function showInputError(inputElement, errorElement, errorMessage) {
 
 // Function to hide input error by removing the class
 function hideInputError(inputElement, errorElement) {
-  inputElement.classList.remove("invalid"); // Remove the invalid class to hide the red border
+  inputElement.classList.remove("invalid");
   errorElement.textContent = "";
-  errorElement.classList.remove("modal__input-error_active"); // Remove class to hide error message
+  errorElement.classList.remove("modal__input-error_active");
 
   const wrapper = inputElement.closest(".modal__input-wrapper");
   wrapper.classList.remove("error-visible");
@@ -67,13 +66,13 @@ profileDescriptionInput.addEventListener("input", () => {
 
 // Event listeners for inputs in Add Card Form
 cardTitleInput.addEventListener("input", () => {
-  cardTitleInput.classList.add("invalid"); // Start showing validation styles after typing
+  cardTitleInput.classList.add("invalid");
   checkInputValidity(cardTitleInput, cardTitleError);
   toggleSaveButtonState(cardForm, cardSaveButton);
 });
 
 cardLinkInput.addEventListener("input", () => {
-  cardLinkInput.classList.add("invalid"); // Start showing validation styles after typing
+  cardLinkInput.classList.add("invalid");
   checkInputValidity(cardLinkInput, cardLinkError);
   toggleSaveButtonState(cardForm, cardSaveButton);
 });
