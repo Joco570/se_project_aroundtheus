@@ -46,57 +46,6 @@ const cardTemplate = document
   .querySelector("#card-template")
   .content.querySelector(".card");
 
-// Elements for validation
-const profileTitleInput = profileForm.elements["title"];
-const profileDescriptionInput = profileForm.elements["description"];
-const saveButton = profileForm.querySelector(".modal__save");
-const titleError = document.querySelector("#profile-title-input-error");
-const descriptionError = document.querySelector(
-  "#profile-description-input-error"
-);
-// Add Card Form elements for validation
-const cardTitleInput = cardForm.elements["title"];
-const cardLinkInput = cardForm.elements["description"];
-const cardSaveButton = cardForm.querySelector(".modal__save");
-const cardTitleError = document.querySelector("#modal-add-title-error");
-const cardLinkError = document.querySelector("#modal-add-link-error");
-
-// Function to show input error with specific styles and message
-function showInputError(inputElement, errorElement, errorMessage) {
-  inputElement.style.borderBottomColor = "rgba(255, 0, 0, 1)";
-  errorElement.textContent = errorMessage;
-  errorElement.style.color = "rgba(255, 0, 0, 1)";
-  errorElement.style.fontFamily = "'Inter', sans-serif";
-  errorElement.style.fontWeight = "400";
-  errorElement.style.fontSize = "12px";
-  errorElement.style.lineHeight = "14.52px";
-
-  // Specific margin adjustments for Add Card modal inputs
-  if (inputElement.id === "modal-add-title") {
-    inputElement.style.marginTop = "5px";
-    inputElement.style.marginBottom = "13px";
-    errorElement.style.marginTop = "5px";
-    errorElement.style.marginBottom = "13px";
-  } else if (inputElement.id === "modal-add-link") {
-    inputElement.style.marginBottom = "0";
-    errorElement.style.marginTop = "5px";
-    errorElement.style.marginBottom = "31.34px";
-  } else {
-    errorElement.style.marginTop = "5px";
-  }
-}
-
-// Function to hide input error and reset styles
-function hideInputError(inputElement, errorElement) {
-  inputElement.style.borderBottomColor = "rgba(0, 0, 0, 0.2)";
-  errorElement.textContent = "";
-  // Reset margins
-  inputElement.style.marginTop = "";
-  inputElement.style.marginBottom = "";
-  errorElement.style.marginTop = "";
-  errorElement.style.marginBottom = "";
-}
-
 // Function to open the popup and add ESC key event listener
 function openPopup(popup) {
   popup.classList.add("modal_opened");
@@ -214,10 +163,16 @@ addNewCardButton.addEventListener("click", () => {
   cardForm.reset();
 
   // Reset styles for inputs and error messages
+  const cardTitleInput = cardForm.elements["title"];
+  const cardLinkInput = cardForm.elements["description"];
+  const cardTitleError = document.querySelector("#modal-add-title-error");
+  const cardLinkError = document.querySelector("#modal-add-link-error");
+
   hideInputError(cardTitleInput, cardTitleError);
   hideInputError(cardLinkInput, cardLinkError);
 
   // Ensure spacing around save button is reset
+  const cardSaveButton = cardForm.querySelector(".modal__save");
   cardSaveButton.classList.add("modal__save_disabled");
   cardSaveButton.disabled = true;
 
@@ -232,9 +187,6 @@ modalCloseButtons.forEach((button) => {
     closePopUp(button.closest(".modal"));
   });
 });
-
-// Add event listener to document for ESC key
-// It will be added and removed in `openPopup` and `closePopUp` functions
 
 // Add event listener to all modals for overlay click
 const modals = document.querySelectorAll(".modal");
