@@ -61,6 +61,42 @@ const cardSaveButton = cardForm.querySelector(".modal__save");
 const cardTitleError = document.querySelector("#modal-add-title-error");
 const cardLinkError = document.querySelector("#modal-add-link-error");
 
+// Function to show input error with specific styles and message
+function showInputError(inputElement, errorElement, errorMessage) {
+  inputElement.style.borderBottomColor = "rgba(255, 0, 0, 1)";
+  errorElement.textContent = errorMessage;
+  errorElement.style.color = "rgba(255, 0, 0, 1)";
+  errorElement.style.fontFamily = "'Inter', sans-serif";
+  errorElement.style.fontWeight = "400";
+  errorElement.style.fontSize = "12px";
+  errorElement.style.lineHeight = "14.52px";
+
+  // Specific margin adjustments for Add Card modal inputs
+  if (inputElement.id === "modal-add-title") {
+    inputElement.style.marginTop = "5px";
+    inputElement.style.marginBottom = "13px";
+    errorElement.style.marginTop = "5px";
+    errorElement.style.marginBottom = "13px";
+  } else if (inputElement.id === "modal-add-link") {
+    inputElement.style.marginBottom = "0";
+    errorElement.style.marginTop = "5px";
+    errorElement.style.marginBottom = "31.34px";
+  } else {
+    errorElement.style.marginTop = "5px";
+  }
+}
+
+// Function to hide input error and reset styles
+function hideInputError(inputElement, errorElement) {
+  inputElement.style.borderBottomColor = "rgba(0, 0, 0, 0.2)";
+  errorElement.textContent = "";
+  // Reset margins
+  inputElement.style.marginTop = "";
+  inputElement.style.marginBottom = "";
+  errorElement.style.marginTop = "";
+  errorElement.style.marginBottom = "";
+}
+
 // Handle opening of the profile edit modal
 profileEditButton.addEventListener("click", () => {
   openPopup(profileEditModal);
