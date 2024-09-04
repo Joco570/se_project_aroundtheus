@@ -65,12 +65,23 @@ const cardLinkError = document.querySelector("#modal-add-link-error");
 function openPopup(popup) {
   popup.classList.add("modal_opened");
 
-  if (popup === profileEditModal) {
-    // Run validation to set button state on opening
-    toggleSaveButtonState(profileForm, saveButton);
-  } else if (popup === profileAddModal) {
-    // Run validation to set button state on opening
-    toggleSaveButtonState(cardForm, cardSaveButton);
+  // Reset all input fields and error messages for the modal being opened
+  const form = popup.querySelector("form");
+  if (form) {
+    form.reset();
+
+    // Hide error messages and reset input styles
+    const inputs = form.querySelectorAll(".modal__input");
+    const errorMessages = form.querySelectorAll(".modal__input-error");
+
+    inputs.forEach((input) => {
+      const errorElement = form.querySelector(`#${input.id}-error`);
+      hideInputError(input, errorElement);
+    });
+
+    // Run validation to set the save button state on opening
+    const saveButton = form.querySelector(".modal__save");
+    toggleSaveButtonState(form, saveButton);
   }
 }
 
@@ -95,7 +106,7 @@ function handleOverlayClick(evt) {
   }
 }
 
-// Attach event listeners for closing modals, including the preview modal
+// Attach event listeners for closing modals
 modalCloseButtons.forEach((button) => {
   button.addEventListener("click", () => {
     closePopUp(button.closest(".modal"));

@@ -121,50 +121,45 @@
   border: none;
   box-shadow: none;
   outline: none;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.2); /* Neutral border */
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
   padding: 0;
   background: transparent;
 }
 
 /* Invalid input styles */
 .modal__input.invalid {
-  border-bottom: 2px solid rgba(255, 0, 0, 1); /* Red border on invalid input */
+  border-bottom: 2px solid rgba(255, 0, 0, 1);
 }
 
 /* Wrapper around input and error to manage spacing */
 .modal__input-wrapper {
   position: relative;
-  margin-bottom: 30px; /* Default space between inputs */
+  margin-bottom: 30px;
 }
 
 /* Specific styling for the description input in the Edit Profile modal */
 #profile-description-input-wrapper {
-  margin-bottom: 48px; /* Space between the description input and the save button */
+  margin-bottom: 48px;
 }
 
 /* Common styles for input error messages */
 .modal__input-error {
   position: absolute;
-  bottom: -20px; /* Ensure the error message is 5px below the input line */
+  bottom: -20px;
   left: 0;
   font-family: "Inter", sans-serif;
   font-weight: 400;
   font-size: 12px;
   line-height: 14.52px;
   color: rgba(255, 0, 0, 1);
-  display: none; /* Initially hidden */
+  display: none;
   width: 100%;
-  min-height: 14.52px; /* Ensures space for one line of text */
+  min-height: 14.52px;
 }
 
 /* Error message visible when input is invalid */
 .modal__input-error_active {
   display: block;
-}
-
-/* Adjust the wrapper height to account for potential two-line error messages */
-.modal__input-wrapper.error-visible {
-  margin-bottom: 44px; /* Increased space to accommodate a two-line error message */
 }
 
 /* Preview modal container styles */
