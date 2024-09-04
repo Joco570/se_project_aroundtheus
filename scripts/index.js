@@ -97,27 +97,21 @@ function hideInputError(inputElement, errorElement) {
   errorElement.style.marginBottom = "";
 }
 
-// Handle opening of the profile edit modal
-profileEditButton.addEventListener("click", () => {
-  openPopup(profileEditModal);
-  profileForm.reset();
-  hideInputError(profileTitleInput, titleError);
-  hideInputError(profileDescriptionInput, descriptionError);
-  toggleSaveButtonState(profileForm, saveButton);
-  profileTitleInput.value = profileTitle.textContent;
-  profileDescriptionInput.value = profileDescription.textContent;
-});
-
-// Universal functions
+// Function to open the popup and add ESC key event listener
 function openPopup(popup) {
   popup.classList.add("modal_opened");
+  // Add ESC key event listener
+  document.addEventListener("keydown", handleEscClose);
 }
 
+// Function to close the popup and remove ESC key event listener
 function closePopUp(modal) {
   modal.classList.remove("modal_opened");
+  // Remove ESC key event listener
+  document.removeEventListener("keydown", handleEscClose);
 }
 
-// Function to close the popup on ESC key press
+// Function to handle ESC key press
 function handleEscClose(evt) {
   if (evt.key === "Escape") {
     const openModal = document.querySelector(".modal_opened");
@@ -127,7 +121,7 @@ function handleEscClose(evt) {
   }
 }
 
-// Function to close the popup when clicking on the overlay
+// Function to handle overlay click
 function handleOverlayClick(evt) {
   if (evt.target.classList.contains("modal_opened")) {
     closePopUp(evt.target);
@@ -240,7 +234,7 @@ modalCloseButtons.forEach((button) => {
 });
 
 // Add event listener to document for ESC key
-document.addEventListener("keydown", handleEscClose);
+// It will be added and removed in `openPopup` and `closePopUp` functions
 
 // Add event listener to all modals for overlay click
 const modals = document.querySelectorAll(".modal");
