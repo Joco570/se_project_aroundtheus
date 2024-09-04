@@ -68,19 +68,17 @@
 
 /* Adjusted save button styles when an error is present */
 .modal__input:invalid ~ .modal__save {
-  background-color: rgba(
-    255,
-    255,
-    255,
-    1
-  ); /* Same background color as the modal */
+  background-color: (255, 255, 255, 1);
   border: 1px solid rgba(0, 0, 0, 0.2);
   color: rgba(0, 0, 0, 0.2);
+  cursor: not-allowed;
 }
 
 /* Disabled save button styles */
 .modal__save_disabled {
-  background-color: rgba(0, 0, 0, 0.8);
+  background-color: rgba(255, 255, 255, 1);
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  color: rgba(0, 0, 0, 0.2);
   cursor: not-allowed;
 }
 
@@ -162,6 +160,11 @@
 /* Error message visible when input is invalid */
 .modal__input-error_active {
   display: block;
+}
+
+/* Adjust the wrapper height to account for potential two-line error messages */
+.modal__input-wrapper.error-visible {
+  margin-bottom: 44px; /* Increased space to accommodate a two-line error message */
 }
 
 /* Preview modal container styles */

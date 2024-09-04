@@ -61,20 +61,17 @@ const cardSaveButton = cardForm.querySelector(".modal__save");
 const cardTitleError = document.querySelector("#modal-add-title-error");
 const cardLinkError = document.querySelector("#modal-add-link-error");
 
-// Handle opening of the profile edit modal
-profileEditButton.addEventListener("click", () => {
-  openPopup(profileEditModal);
-  profileForm.reset();
-  hideInputError(profileTitleInput, titleError);
-  hideInputError(profileDescriptionInput, descriptionError);
-  toggleSaveButtonState(profileForm, saveButton);
-  profileTitleInput.value = profileTitle.textContent;
-  profileDescriptionInput.value = profileDescription.textContent;
-});
-
 // Universal functions
 function openPopup(popup) {
   popup.classList.add("modal_opened");
+
+  if (popup === profileEditModal) {
+    // Run validation to set button state on opening
+    toggleSaveButtonState(profileForm, saveButton);
+  } else if (popup === profileAddModal) {
+    // Run validation to set button state on opening
+    toggleSaveButtonState(cardForm, cardSaveButton);
+  }
 }
 
 function closePopUp(modal) {
@@ -182,6 +179,7 @@ profileEditButton.addEventListener("click", () => {
   openPopup(profileEditModal);
   profileForm.elements["title"].value = profileTitle.textContent;
   profileForm.elements["description"].value = profileDescription.textContent;
+  toggleSaveButtonState(profileForm, saveButton);
 });
 
 addNewCardButton.addEventListener("click", () => {
@@ -198,9 +196,8 @@ addNewCardButton.addEventListener("click", () => {
   cardSaveButton.classList.add("modal__save_disabled");
   cardSaveButton.disabled = true;
 
-  // Reset input margins to default
-  cardTitleInput.style.marginBottom = "29.74px";
-  cardLinkInput.style.marginBottom = "48px";
+  // Run validation to set button state on opening
+  toggleSaveButtonState(cardForm, cardSaveButton);
 });
 
 // Add event listener to document for ESC key

@@ -44,12 +44,12 @@ function hideInputError(inputElement, errorElement) {
 
 // Function to toggle the save button state
 function toggleSaveButtonState(form, button) {
-  if (form.checkValidity()) {
-    button.classList.remove("modal__save_disabled");
-    button.disabled = false;
-  } else {
+  if (!form.checkValidity()) {
     button.classList.add("modal__save_disabled");
     button.disabled = true;
+  } else {
+    button.classList.remove("modal__save_disabled");
+    button.disabled = false;
   }
 }
 
@@ -66,13 +66,11 @@ profileDescriptionInput.addEventListener("input", () => {
 
 // Event listeners for inputs in Add Card Form
 cardTitleInput.addEventListener("input", () => {
-  cardTitleInput.classList.add("invalid");
   checkInputValidity(cardTitleInput, cardTitleError);
   toggleSaveButtonState(cardForm, cardSaveButton);
 });
 
 cardLinkInput.addEventListener("input", () => {
-  cardLinkInput.classList.add("invalid");
   checkInputValidity(cardLinkInput, cardLinkError);
   toggleSaveButtonState(cardForm, cardSaveButton);
 });
