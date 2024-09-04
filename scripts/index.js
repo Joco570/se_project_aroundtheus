@@ -98,6 +98,13 @@ function handleOverlayClick(evt) {
   }
 }
 
+// Attach event listeners for closing modals, including the preview modal
+modalCloseButtons.forEach((button) => {
+  button.addEventListener("click", () => {
+    closePopUp(button.closest(".modal"));
+  });
+});
+
 function createCardElement(cardData) {
   const cardElement = cardTemplate.cloneNode(true);
 
@@ -194,13 +201,6 @@ addNewCardButton.addEventListener("click", () => {
   // Reset input margins to default
   cardTitleInput.style.marginBottom = "29.74px";
   cardLinkInput.style.marginBottom = "48px";
-});
-
-// Attach event listeners for closing modals
-modalCloseButtons.forEach((button) => {
-  button.addEventListener("click", () => {
-    closePopUp(button.closest(".modal"));
-  });
 });
 
 // Add event listener to document for ESC key

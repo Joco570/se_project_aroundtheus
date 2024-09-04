@@ -104,6 +104,13 @@
   opacity: 60%;
 }
 
+/* Specific styles for the close button in the preview modal */
+.modal__close--preview {
+  position: absolute;
+  top: -42px;
+  right: -30px;
+}
+
 /* Input styles */
 .modal__input {
   display: block;
@@ -160,6 +167,41 @@
 /* Adjust the wrapper height to account for potential two-line error messages */
 .modal__input-wrapper.error-visible {
   margin-bottom: 44px; /* Increased space to accommodate a two-line error message */
+}
+
+/* Preview modal container styles */
+.modal__container--preview {
+  border: none;
+  box-shadow: none;
+  background-color: transparent;
+  max-width: 75vw;
+  max-height: 75vh;
+  padding: 0;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+}
+
+/* Image in the preview modal */
+.modal__image {
+  max-width: 75vw;
+  max-height: 75vh;
+  height: auto;
+  width: auto;
+  display: block;
+  margin: 0;
+  padding: 0;
+}
+
+/* Caption in the preview modal */
+.modal__caption {
+  color: white;
+  text-align: left;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 14.52px;
+  margin-top: 10px;
 }
 
 /* Responsive styles */
