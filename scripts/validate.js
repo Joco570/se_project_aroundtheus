@@ -6,7 +6,7 @@ function checkInputValidity(inputElement, errorElement) {
     showInputError(
       inputElement,
       errorElement,
-      `Please lengthen this text to ${inputElement.minLength} characters or more. You are currently using only ${inputElement.value.length} characters.`
+      `Please lengthen this text to ${inputElement.minLength} characters or more.`
     );
   } else if (
     inputElement.validity.typeMismatch &&
