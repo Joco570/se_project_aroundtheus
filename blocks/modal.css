@@ -97,6 +97,7 @@
   bottom: calc(100% + 6px);
   left: calc(100% + 6px);
   cursor: pointer;
+  z-index: 1000;
 }
 
 .modal__close:hover {
@@ -115,125 +116,50 @@
   border: none;
   box-shadow: none;
   outline: none;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2); /* Neutral border */
   padding: 0;
   background: transparent;
-  margin-bottom: 29.74px;
+}
+
+/* Invalid input styles */
+.modal__input.invalid {
+  border-bottom: 2px solid rgba(255, 0, 0, 1); /* Red border on invalid input */
+}
+
+/* Wrapper around input and error to manage spacing */
+.modal__input-wrapper {
+  position: relative;
+  margin-bottom: 30px; /* Default space between inputs */
+}
+
+/* Specific styling for the description input in the Edit Profile modal */
+#profile-description-input-wrapper {
+  margin-bottom: 48px; /* Space between the description input and the save button */
 }
 
 /* Common styles for input error messages */
 .modal__input-error {
-  display: block;
-  font-family: "Inter", sans-serif;
-  font-weight: 400;
-  font-size: 12px;
-  line-height: 14.52px;
-  color: rgba(255, 0, 0, 1);
-  margin-top: 5px;
-  margin-bottom: 13px;
-}
-
-/* Adjust margin for the last error message before the save button */
-.modal__input:last-of-type + .modal__input-error {
-  margin-bottom: 31.34px;
-}
-
-/* Adjust margin when there's an error */
-.modal__input:invalid {
-  margin-bottom: 5px;
-  border-bottom: 2px solid rgba(255, 0, 0, 1);
-}
-
-/* Error message styles */
-.modal__input:invalid + .modal__input-error {
-  display: block;
-  font-family: "Inter", sans-serif;
-  font-weight: 400;
-  font-size: 12px;
-  line-height: 14.52px;
-  margin-top: 5px;
-  margin-bottom: 13px !important;
-  color: rgba(255, 0, 0, 1);
-}
-
-/* Specific margin for the last error message before the save button */
-.modal__input:invalid:last-of-type + .modal__input-error {
-  margin-bottom: 31.34px !important;
-}
-
-/* Specific styling for invalid input in the Add Card modal's title */
-#modal-add-title:invalid {
-  margin-top: 5px;
-  margin-bottom: 13px;
-}
-
-/* Adjust margin for the error message below the title input */
-#modal-add-title-error {
-  margin-top: 5px;
-  margin-bottom: 13px;
-}
-
-/* Specific styling for invalid input in the Add Card modal's URL */
-#modal-add-link:invalid {
-  margin-bottom: 0; /* Remove bottom margin */
-}
-
-/* Adjust margin for the error message below the URL input */
-#modal-add-link-error {
-  margin-top: 5px;
-  margin-bottom: 31.34px;
-}
-
-::placeholder {
-  color: rgba(196, 196, 196, 1);
-  opacity: 1;
-}
-
-.modal__input:last-of-type {
-  margin-bottom: 48px;
-}
-
-.modal__input:invalid:last-of-type {
-  margin-bottom: 5px;
-}
-
-/* Specific styles for the preview modal */
-.modal__container--preview {
-  border: none;
-  box-shadow: none;
-  background-color: transparent;
-  max-width: 75vw;
-  max-height: 75vh;
-  padding: 0;
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  margin: auto;
-}
-
-.modal__image {
-  max-width: 75vw;
-  max-height: 75vh;
-  height: auto;
-  width: auto;
-  display: block;
-  margin: 0;
-  padding: 0;
-}
-
-.modal__caption {
-  color: white;
-  text-align: left;
-  font-weight: 400;
-  font-size: 12px;
-  line-height: 14.52px;
-  margin-top: 10px;
-}
-
-.modal__close--preview {
   position: absolute;
-  top: -42px;
-  right: -30px;
+  bottom: -20px; /* Ensure the error message is 5px below the input line */
+  left: 0;
+  font-family: "Inter", sans-serif;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 14.52px;
+  color: rgba(255, 0, 0, 1);
+  display: none; /* Initially hidden */
+  width: 100%;
+  min-height: 14.52px; /* Ensures space for one line of text */
+}
+
+/* Error message visible when input is invalid */
+.modal__input-error_active {
+  display: block;
+}
+
+/* Adjust the wrapper height to account for potential two-line error messages */
+.modal__input-wrapper.error-visible {
+  margin-bottom: 44px; /* Increased space to accommodate a two-line error message */
 }
 
 /* Responsive styles */

@@ -46,21 +46,42 @@ const cardTemplate = document
   .querySelector("#card-template")
   .content.querySelector(".card");
 
-// Function to open the popup and add ESC key event listener
+// Elements for validation
+const profileTitleInput = profileForm.elements["title"];
+const profileDescriptionInput = profileForm.elements["description"];
+const saveButton = profileForm.querySelector(".modal__save");
+const titleError = document.querySelector("#profile-title-input-error");
+const descriptionError = document.querySelector(
+  "#profile-description-input-error"
+);
+// Add Card Form elements for validation
+const cardTitleInput = cardForm.elements["title"];
+const cardLinkInput = cardForm.elements["description"];
+const cardSaveButton = cardForm.querySelector(".modal__save");
+const cardTitleError = document.querySelector("#modal-add-title-error");
+const cardLinkError = document.querySelector("#modal-add-link-error");
+
+// Handle opening of the profile edit modal
+profileEditButton.addEventListener("click", () => {
+  openPopup(profileEditModal);
+  profileForm.reset();
+  hideInputError(profileTitleInput, titleError);
+  hideInputError(profileDescriptionInput, descriptionError);
+  toggleSaveButtonState(profileForm, saveButton);
+  profileTitleInput.value = profileTitle.textContent;
+  profileDescriptionInput.value = profileDescription.textContent;
+});
+
+// Universal functions
 function openPopup(popup) {
   popup.classList.add("modal_opened");
-  // Add ESC key event listener
-  document.addEventListener("keydown", handleEscClose);
 }
 
-// Function to close the popup and remove ESC key event listener
 function closePopUp(modal) {
   modal.classList.remove("modal_opened");
-  // Remove ESC key event listener
-  document.removeEventListener("keydown", handleEscClose);
 }
 
-// Function to handle ESC key press
+// Function to close the popup on ESC key press
 function handleEscClose(evt) {
   if (evt.key === "Escape") {
     const openModal = document.querySelector(".modal_opened");
@@ -70,7 +91,7 @@ function handleEscClose(evt) {
   }
 }
 
-// Function to handle overlay click
+// Function to close the popup when clicking on the overlay
 function handleOverlayClick(evt) {
   if (evt.target.classList.contains("modal_opened")) {
     closePopUp(evt.target);
@@ -163,16 +184,10 @@ addNewCardButton.addEventListener("click", () => {
   cardForm.reset();
 
   // Reset styles for inputs and error messages
-  const cardTitleInput = cardForm.elements["title"];
-  const cardLinkInput = cardForm.elements["description"];
-  const cardTitleError = document.querySelector("#modal-add-title-error");
-  const cardLinkError = document.querySelector("#modal-add-link-error");
-
   hideInputError(cardTitleInput, cardTitleError);
   hideInputError(cardLinkInput, cardLinkError);
 
   // Ensure spacing around save button is reset
-  const cardSaveButton = cardForm.querySelector(".modal__save");
   cardSaveButton.classList.add("modal__save_disabled");
   cardSaveButton.disabled = true;
 
@@ -187,6 +202,9 @@ modalCloseButtons.forEach((button) => {
     closePopUp(button.closest(".modal"));
   });
 });
+
+// Add event listener to document for ESC key
+document.addEventListener("keydown", handleEscClose);
 
 // Add event listener to all modals for overlay click
 const modals = document.querySelectorAll(".modal");

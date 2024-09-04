@@ -1,84 +1,79 @@
 // Function to check input validity
-function checkInputValidity(inputElement, errorElement, config) {
+function checkInputValidity(inputElement, errorElement) {
   if (inputElement.validity.valueMissing) {
-    showInputError(
-      inputElement,
-      errorElement,
-      "Please fill out this field.",
-      config
-    );
+    showInputError(inputElement, errorElement, "Please fill out this field.");
   } else if (inputElement.validity.tooShort) {
     showInputError(
       inputElement,
       errorElement,
-      `Please lengthen this text to ${inputElement.minLength} characters or more.`,
-      config
+      `Please lengthen this text to ${inputElement.minLength} characters or more. You are currently using only ${inputElement.value.length} characters.`
     );
   } else if (
     inputElement.validity.typeMismatch &&
     inputElement.type === "url"
   ) {
-    showInputError(
-      inputElement,
-      errorElement,
-      "Please enter a valid URL.",
-      config
-    );
+    showInputError(inputElement, errorElement, "Please enter a valid URL.");
   } else {
-    hideInputError(inputElement, errorElement, config);
+    hideInputError(inputElement, errorElement);
   }
 }
 
-// Function to show input error with specific styles and message
-function showInputError(inputElement, errorElement, errorMessage, config) {
-  inputElement.classList.add(config.inputErrorClass);
+// Function to show input error by adding a class
+function showInputError(inputElement, errorElement, errorMessage) {
+  inputElement.classList.add("invalid"); // Add the invalid class to show the red border
   errorElement.textContent = errorMessage;
-  errorElement.classList.add(config.errorClass);
+  errorElement.classList.add("modal__input-error_active"); // Add class to display error message
+
+  const wrapper = inputElement.closest(".modal__input-wrapper");
+  if (errorMessage.length > 40) {
+    // Arbitrary length check for long error messages
+    wrapper.classList.add("error-visible");
+  } else {
+    wrapper.classList.remove("error-visible");
+  }
 }
 
-// Function to hide input error and reset styles
-function hideInputError(inputElement, errorElement, config) {
-  inputElement.classList.remove(config.inputErrorClass);
+// Function to hide input error by removing the class
+function hideInputError(inputElement, errorElement) {
+  inputElement.classList.remove("invalid"); // Remove the invalid class to hide the red border
   errorElement.textContent = "";
-  errorElement.classList.remove(config.errorClass);
+  errorElement.classList.remove("modal__input-error_active"); // Remove class to hide error message
+
+  const wrapper = inputElement.closest(".modal__input-wrapper");
+  wrapper.classList.remove("error-visible");
 }
 
 // Function to toggle the save button state
-function toggleSaveButtonState(form, button, config) {
+function toggleSaveButtonState(form, button) {
   if (form.checkValidity()) {
-    button.classList.remove(config.inactiveButtonClass);
+    button.classList.remove("modal__save_disabled");
     button.disabled = false;
   } else {
-    button.classList.add(config.inactiveButtonClass);
+    button.classList.add("modal__save_disabled");
     button.disabled = true;
   }
 }
 
-// Function to add validation event listeners to forms
-function enableValidation(config) {
-  const forms = document.querySelectorAll(config.formSelector);
+// Event listeners for inputs in Profile Edit Form
+profileTitleInput.addEventListener("input", () => {
+  checkInputValidity(profileTitleInput, titleError);
+  toggleSaveButtonState(profileForm, saveButton);
+});
 
-  forms.forEach((form) => {
-    const inputElements = form.querySelectorAll(config.inputSelector);
-    const saveButton = form.querySelector(config.submitButtonSelector);
+profileDescriptionInput.addEventListener("input", () => {
+  checkInputValidity(profileDescriptionInput, descriptionError);
+  toggleSaveButtonState(profileForm, saveButton);
+});
 
-    inputElements.forEach((inputElement) => {
-      const errorElement = form.querySelector(`#${inputElement.id}-error`);
+// Event listeners for inputs in Add Card Form
+cardTitleInput.addEventListener("input", () => {
+  cardTitleInput.classList.add("invalid"); // Start showing validation styles after typing
+  checkInputValidity(cardTitleInput, cardTitleError);
+  toggleSaveButtonState(cardForm, cardSaveButton);
+});
 
-      inputElement.addEventListener("input", () => {
-        checkInputValidity(inputElement, errorElement, config);
-        toggleSaveButtonState(form, saveButton, config);
-      });
-    });
-  });
-}
-
-// Enable validation with the specified configuration
-enableValidation({
-  formSelector: ".modal__form",
-  inputSelector: ".modal__input",
-  submitButtonSelector: ".modal__save",
-  inactiveButtonClass: "modal__save_disabled",
-  inputErrorClass: "modal__input_type_error",
-  errorClass: "modal__error_visible",
+cardLinkInput.addEventListener("input", () => {
+  cardLinkInput.classList.add("invalid"); // Start showing validation styles after typing
+  checkInputValidity(cardLinkInput, cardLinkError);
+  toggleSaveButtonState(cardForm, cardSaveButton);
 });
