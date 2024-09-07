@@ -31,32 +31,15 @@ function setEventListeners(form, config) {
   toggleSaveButtonState(form, button, config);
 }
 
-// Function to check input validity
+// Function to check input validity using browser's validationMessage
 function checkInputValidity(inputElement, form, config) {
   const errorElement = form.querySelector(`#${inputElement.id}-error`);
 
-  if (inputElement.validity.valueMissing) {
+  if (!inputElement.validity.valid) {
     showInputError(
       inputElement,
       errorElement,
-      "Please fill out this field.",
-      config
-    );
-  } else if (inputElement.validity.tooShort) {
-    showInputError(
-      inputElement,
-      errorElement,
-      `Please lengthen this text to ${inputElement.minLength} characters or more.`,
-      config
-    );
-  } else if (
-    inputElement.validity.typeMismatch &&
-    inputElement.type === "url"
-  ) {
-    showInputError(
-      inputElement,
-      errorElement,
-      "Please enter a valid URL.",
+      inputElement.validationMessage,
       config
     );
   } else {
@@ -64,32 +47,18 @@ function checkInputValidity(inputElement, form, config) {
   }
 }
 
-// Function to show input error with dynamic margin and specific class
+// Updated function to show error messages
 function showInputError(inputElement, errorElement, errorMessage, config) {
   inputElement.classList.add(config.inputErrorClass);
   errorElement.textContent = errorMessage;
   errorElement.classList.add(config.errorClass);
-
-  // Remove any previously added specific error class
-  errorElement.classList.remove("lengthen-text-error");
-
-  if (errorMessage === "Please fill out this field.") {
-    errorElement.style.marginTop = "5px";
-  } else if (errorMessage.includes("Please lengthen this text")) {
-    errorElement.style.marginTop = "10px";
-    errorElement.classList.add("lengthen-text-error");
-  } else {
-    errorElement.style.marginTop = "5px";
-  }
 }
 
-// Function to hide input error
+// Updated function to hide error messages
 function hideInputError(inputElement, errorElement, config) {
   inputElement.classList.remove(config.inputErrorClass);
   errorElement.textContent = "";
   errorElement.classList.remove(config.errorClass);
-  errorElement.classList.remove("lengthen-text-error");
-  errorElement.style.marginTop = "";
 }
 
 // Function to toggle save button state

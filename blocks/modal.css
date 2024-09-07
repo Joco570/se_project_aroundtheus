@@ -131,31 +131,23 @@
   border-bottom: 2px solid rgba(255, 0, 0, 1);
 }
 
-/* Wrapper around input and error to manage spacing */
+/* Wrapper around input */
 .modal__input-wrapper {
   position: relative;
-  margin-bottom: 30px;
-}
-
-/* Specific styling for the description input in the Edit Profile modal */
-#profile-description-input-wrapper {
-  margin-bottom: 48px;
+  margin-bottom: 30px; /* Same margin-bottom */
+  display: flex;
+  flex-direction: column; /* Allow error message to naturally flow below the input */
 }
 
 /* Common styles for input error messages */
 .modal__input-error {
-  position: absolute;
-  bottom: -20px;
-  left: 0;
   font-family: "Inter", sans-serif;
   font-weight: 400;
   font-size: 12px;
   line-height: 14.52px;
   color: rgba(255, 0, 0, 1);
   display: none;
-  width: 100%;
-  min-height: 14.52px;
-  margin-top: 5px; /* Keep top margin at 5px */
+  margin-top: 5px; /* Ensure a gap between input and error message */
 }
 
 /* Error message visible when input is invalid */
@@ -175,27 +167,6 @@
   display: flex;
   flex-direction: column;
   margin: auto;
-}
-
-/* Image in the preview modal */
-.modal__image {
-  max-width: 75vw;
-  max-height: 75vh;
-  height: auto;
-  width: auto;
-  display: block;
-  margin: 0;
-  padding: 0;
-}
-
-/* Caption in the preview modal */
-.modal__caption {
-  color: white;
-  text-align: left;
-  font-weight: 400;
-  font-size: 12px;
-  line-height: 14.52px;
-  margin-top: 10px;
 }
 
 /* Responsive styles */
@@ -242,16 +213,6 @@
   }
 
   .modal__input-wrapper {
-    margin-bottom: 30px; /* Keep margin-bottom at 30px */
-  }
-
-  /* Ensure .modal__close--preview remains unaffected by media queries */
-  .modal__close--preview {
-    top: -30px;
-    right: -30px;
-  }
-
-  .lengthen-text-error {
-    margin-bottom: -10px;
+    margin-bottom: 30px; /* Same margin-bottom for consistency */
   }
 }

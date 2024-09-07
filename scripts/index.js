@@ -67,23 +67,6 @@ function openPopup(popup) {
 
   // Add esc key handler only when a modal is opened
   document.addEventListener("keydown", handleEscClose);
-
-  // Reset all input fields and error messages for the modal being opened
-  const form = popup.querySelector("form");
-  if (form) {
-    form.reset();
-
-    const inputs = form.querySelectorAll(".modal__input");
-    const errorMessages = form.querySelectorAll(".modal__input-error");
-
-    inputs.forEach((input) => {
-      const errorElement = form.querySelector(`#${input.id}-error`);
-      hideInputError(input, errorElement, config);
-    });
-
-    const saveButton = form.querySelector(".modal__save");
-    toggleSaveButtonState(form, saveButton, config);
-  }
 }
 
 function closePopUp(modal) {
@@ -168,12 +151,10 @@ function handleProfileEditSubmit(e) {
 
 function handleAddCardSubmit(e) {
   e.preventDefault();
+
   const titleValue = cardForm.elements["title"].value;
   const linkValue = cardForm.elements["description"].value;
-  if (!titleValue || !linkValue) {
-    console.log("Both title and link are required.");
-    return;
-  }
+
   const newCardData = {
     name: titleValue,
     link: linkValue,
@@ -181,8 +162,8 @@ function handleAddCardSubmit(e) {
 
   renderCard(newCardData);
 
+  // Clear the inputs only after submitting a card
   cardForm.reset();
-
   closePopUp(profileAddModal);
 }
 
@@ -192,36 +173,24 @@ cardForm.addEventListener("submit", handleAddCardSubmit);
 
 profileEditButton.addEventListener("click", () => {
   openPopup(profileEditModal);
+
+  // Set the form fields with current profile data
   profileForm.elements["title"].value = profileTitle.textContent;
   profileForm.elements["description"].value = profileDescription.textContent;
+
+  // Hide any existing error messages for the profile form inputs
+  hideInputError(profileTitleInput, titleError, config);
+  hideInputError(profileDescriptionInput, descriptionError, config);
+
+  // Run validation to set button state on opening
   toggleSaveButtonState(profileForm, saveButton, config);
 });
 
 addNewCardButton.addEventListener("click", () => {
   openPopup(profileAddModal);
 
-  // Reset the form inputs and errors
-  cardForm.reset();
-
-  // Reset styles for inputs and error messages
-  hideInputError(cardTitleInput, cardTitleError, config);
-  hideInputError(cardLinkInput, cardLinkError, config);
-
-  // Ensure spacing around save button is reset
-  cardSaveButton.classList.add("modal__save_disabled");
-  cardSaveButton.disabled = true;
-
   // Run validation to set button state on opening
   toggleSaveButtonState(cardForm, cardSaveButton, config);
-});
-
-// Add event listener to document for ESC key
-document.addEventListener("keydown", handleEscClose);
-
-// Add event listener to all modals for overlay click
-const modals = document.querySelectorAll(".modal");
-modals.forEach((modal) => {
-  modal.addEventListener("click", handleOverlayClick);
 });
 
 // Initialize Cards
