@@ -64,17 +64,20 @@ function checkInputValidity(inputElement, form, config) {
   }
 }
 
-// Function to show input error with dynamic margin
+// Function to show input error with dynamic margin and specific class
 function showInputError(inputElement, errorElement, errorMessage, config) {
   inputElement.classList.add(config.inputErrorClass);
   errorElement.textContent = errorMessage;
   errorElement.classList.add(config.errorClass);
 
-  // Set margin-top dynamically based on error message
+  // Remove any previously added specific error class
+  errorElement.classList.remove("lengthen-text-error");
+
   if (errorMessage === "Please fill out this field.") {
     errorElement.style.marginTop = "5px";
   } else if (errorMessage.includes("Please lengthen this text")) {
     errorElement.style.marginTop = "10px";
+    errorElement.classList.add("lengthen-text-error"); // Add specific class
   } else {
     errorElement.style.marginTop = "5px"; // Default margin for other messages
   }
@@ -85,6 +88,7 @@ function hideInputError(inputElement, errorElement, config) {
   inputElement.classList.remove(config.inputErrorClass);
   errorElement.textContent = "";
   errorElement.classList.remove(config.errorClass);
+  errorElement.classList.remove("lengthen-text-error"); // Reset the specific class
   errorElement.style.marginTop = ""; // Reset margin
 }
 
