@@ -155,7 +155,7 @@
   display: none;
   width: 100%;
   min-height: 14.52px;
-  margin-bottom: -10px;
+  margin-top: 5px; /* Keep top margin at 5px */
 }
 
 /* Error message visible when input is invalid */
@@ -234,6 +234,15 @@
   .modal__container--preview {
     max-width: 90vw;
     max-height: 90vh;
+  }
+
+  /* Adjustments for small screens */
+  .modal__input-error {
+    margin-top: 5px; /* Keep margin-top at 5px */
+  }
+
+  .modal__input-wrapper {
+    margin-bottom: 30px; /* Keep margin-bottom at 30px */
   }
 
   /* Ensure .modal__close--preview remains unaffected by media queries */

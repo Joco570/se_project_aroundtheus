@@ -64,11 +64,20 @@ function checkInputValidity(inputElement, form, config) {
   }
 }
 
-// Function to show input error
+// Function to show input error with dynamic margin
 function showInputError(inputElement, errorElement, errorMessage, config) {
   inputElement.classList.add(config.inputErrorClass);
   errorElement.textContent = errorMessage;
   errorElement.classList.add(config.errorClass);
+
+  // Set margin-top dynamically based on error message
+  if (errorMessage === "Please fill out this field.") {
+    errorElement.style.marginTop = "5px";
+  } else if (errorMessage.includes("Please lengthen this text")) {
+    errorElement.style.marginTop = "10px";
+  } else {
+    errorElement.style.marginTop = "5px"; // Default margin for other messages
+  }
 }
 
 // Function to hide input error
@@ -76,6 +85,7 @@ function hideInputError(inputElement, errorElement, config) {
   inputElement.classList.remove(config.inputErrorClass);
   errorElement.textContent = "";
   errorElement.classList.remove(config.errorClass);
+  errorElement.style.marginTop = ""; // Reset margin
 }
 
 // Function to toggle save button state
