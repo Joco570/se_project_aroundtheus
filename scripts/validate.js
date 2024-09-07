@@ -89,5 +89,5 @@ function toggleSaveButtonState(form, button, config) {
   }
 }
 
-// Initialize validation
+// Initialize validation for all forms
 enableValidation(config);
