@@ -6,6 +6,7 @@ const config = {
   inactiveButtonClass: "modal__save_disabled",
   inputErrorClass: "invalid",
   errorClass: "modal__input-error_active",
+  lengthenTextErrorClass: "lengthen-text-error",
 };
 
 // Function to enable validation for all forms
@@ -54,11 +55,12 @@ function showInputError(inputElement, errorElement, errorMessage, config) {
   errorElement.classList.add(config.errorClass);
 }
 
-// Updated function to hide error messages
+// Updated function to hide error messages and remove lengthen-text-error class
 function hideInputError(inputElement, errorElement, config) {
   inputElement.classList.remove(config.inputErrorClass);
   errorElement.textContent = "";
   errorElement.classList.remove(config.errorClass);
+  errorElement.classList.remove(config.lengthenTextErrorClass);
 }
 
 // Function to toggle save button state
