@@ -155,6 +155,7 @@
   display: none;
   width: 100%;
   min-height: 14.52px;
+  margin-bottom: -10px;
 }
 
 /* Error message visible when input is invalid */

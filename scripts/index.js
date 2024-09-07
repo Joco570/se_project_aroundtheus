@@ -78,11 +78,11 @@ function openPopup(popup) {
 
     inputs.forEach((input) => {
       const errorElement = form.querySelector(`#${input.id}-error`);
-      hideInputError(input, errorElement);
+      hideInputError(input, errorElement, config); // Hide any previous error message
     });
 
     const saveButton = form.querySelector(".modal__save");
-    toggleSaveButtonState(form, saveButton);
+    toggleSaveButtonState(form, saveButton, config); // Reset button state based on validity
   }
 }
 
@@ -194,7 +194,7 @@ profileEditButton.addEventListener("click", () => {
   openPopup(profileEditModal);
   profileForm.elements["title"].value = profileTitle.textContent;
   profileForm.elements["description"].value = profileDescription.textContent;
-  toggleSaveButtonState(profileForm, saveButton);
+  toggleSaveButtonState(profileForm, saveButton, config);
 });
 
 addNewCardButton.addEventListener("click", () => {
@@ -204,15 +204,15 @@ addNewCardButton.addEventListener("click", () => {
   cardForm.reset();
 
   // Reset styles for inputs and error messages
-  hideInputError(cardTitleInput, cardTitleError);
-  hideInputError(cardLinkInput, cardLinkError);
+  hideInputError(cardTitleInput, cardTitleError, config);
+  hideInputError(cardLinkInput, cardLinkError, config);
 
   // Ensure spacing around save button is reset
   cardSaveButton.classList.add("modal__save_disabled");
   cardSaveButton.disabled = true;
 
   // Run validation to set button state on opening
-  toggleSaveButtonState(cardForm, cardSaveButton);
+  toggleSaveButtonState(cardForm, cardSaveButton, config);
 });
 
 // Add event listener to document for ESC key
