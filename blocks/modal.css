@@ -102,13 +102,6 @@
   opacity: 60%;
 }
 
-/* Specific styles for the close button in the preview modal */
-.modal__close--preview {
-  position: absolute;
-  top: -42px;
-  right: -30px;
-}
-
 /* Input styles */
 .modal__input {
   display: block;
@@ -134,9 +127,9 @@
 /* Wrapper around input */
 .modal__input-wrapper {
   position: relative;
-  margin-bottom: 30px; /* Same margin-bottom */
   display: flex;
-  flex-direction: column; /* Allow error message to naturally flow below the input */
+  flex-direction: column;
+  margin-bottom: 0;
 }
 
 /* Common styles for input error messages */
@@ -146,13 +139,15 @@
   font-size: 12px;
   line-height: 14.52px;
   color: rgba(255, 0, 0, 1);
-  display: none;
-  margin-top: 5px; /* Ensure a gap between input and error message */
+  height: 30px;
+  display: block;
+  margin-top: 5px;
+  visibility: hidden;
 }
 
 /* Error message visible when input is invalid */
 .modal__input-error_active {
-  display: block;
+  visibility: visible;
 }
 
 /* Preview modal container styles */
@@ -209,10 +204,7 @@
 
   /* Adjustments for small screens */
   .modal__input-error {
-    margin-top: 5px; /* Keep margin-top at 5px */
-  }
-
-  .modal__input-wrapper {
-    margin-bottom: 30px; /* Same margin-bottom for consistency */
+    margin-top: 5px;
+    height: 30px;
   }
 }
