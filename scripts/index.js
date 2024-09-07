@@ -78,11 +78,11 @@ function openPopup(popup) {
 
     inputs.forEach((input) => {
       const errorElement = form.querySelector(`#${input.id}-error`);
-      hideInputError(input, errorElement, config); // Hide any previous error message
+      hideInputError(input, errorElement, config);
     });
 
     const saveButton = form.querySelector(".modal__save");
-    toggleSaveButtonState(form, saveButton, config); // Reset button state based on validity
+    toggleSaveButtonState(form, saveButton, config);
   }
 }
 

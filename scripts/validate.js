@@ -77,9 +77,9 @@ function showInputError(inputElement, errorElement, errorMessage, config) {
     errorElement.style.marginTop = "5px";
   } else if (errorMessage.includes("Please lengthen this text")) {
     errorElement.style.marginTop = "10px";
-    errorElement.classList.add("lengthen-text-error"); // Add specific class
+    errorElement.classList.add("lengthen-text-error");
   } else {
-    errorElement.style.marginTop = "5px"; // Default margin for other messages
+    errorElement.style.marginTop = "5px";
   }
 }
 
@@ -88,8 +88,8 @@ function hideInputError(inputElement, errorElement, config) {
   inputElement.classList.remove(config.inputErrorClass);
   errorElement.textContent = "";
   errorElement.classList.remove(config.errorClass);
-  errorElement.classList.remove("lengthen-text-error"); // Reset the specific class
-  errorElement.style.marginTop = ""; // Reset margin
+  errorElement.classList.remove("lengthen-text-error");
+  errorElement.style.marginTop = "";
 }
 
 // Function to toggle save button state
