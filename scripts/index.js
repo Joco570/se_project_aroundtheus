@@ -67,6 +67,9 @@ function openPopup(popup) {
 
   // Add esc key handler only when a modal is opened
   document.addEventListener("keydown", handleEscClose);
+
+  // Add click handler for closing popup by clicking on overlay
+  popup.addEventListener("mousedown", handleOverlayClick);
 }
 
 function closePopUp(modal) {
@@ -74,6 +77,9 @@ function closePopUp(modal) {
 
   // Remove esc key handler when the modal is closed
   document.removeEventListener("keydown", handleEscClose);
+
+  // Remove click handler for overlay
+  modal.removeEventListener("mousedown", handleOverlayClick);
 }
 
 // Function to close the popup on ESC key press
