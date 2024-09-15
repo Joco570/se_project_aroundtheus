@@ -1,3 +1,8 @@
+import FormValidator from "../components/FormValidator.js";
+import Card from "../components/Card.js";
+
+console.log("index.js loaded"); // Debugging Line
+
 // Data
 const initialCards = [
   {
@@ -42,47 +47,39 @@ const previewCaption = previewModal.querySelector("#modal-caption");
 // Accessing forms using document.forms
 const profileForm = document.forms["profile-form"];
 const cardForm = document.forms["card-form"];
-const cardTemplate = document
-  .querySelector("#card-template")
-  .content.querySelector(".card");
 
-// Elements for validation
-const profileTitleInput = profileForm.elements["title"];
-const profileDescriptionInput = profileForm.elements["description"];
-const saveButton = profileForm.querySelector(".modal__save");
-const titleError = document.querySelector("#profile-title-input-error");
-const descriptionError = document.querySelector(
-  "#profile-description-input-error"
-);
-// Add Card Form elements for validation
-const cardTitleInput = cardForm.elements["title"];
-const cardLinkInput = cardForm.elements["description"];
-const cardSaveButton = cardForm.querySelector(".modal__save");
-const cardTitleError = document.querySelector("#modal-add-title-error");
-const cardLinkError = document.querySelector("#modal-add-link-error");
+// Validation settings
+const validationSettings = {
+  formSelector: ".modal__form",
+  inputSelector: ".modal__input",
+  submitButtonSelector: ".modal__save",
+  inactiveButtonClass: "modal__save_disabled",
+  inputErrorClass: "modal__input_type_error",
+  errorClass: "modal__input-error_visible",
+};
+
+// Create a FormValidator instance for each form
+const profileFormValidator = new FormValidator(validationSettings, profileForm);
+const cardFormValidator = new FormValidator(validationSettings, cardForm);
+
+profileFormValidator.enableValidation();
+cardFormValidator.enableValidation();
+
+console.log("FormValidators initialized"); // Debugging Line
 
 // Universal functions
 function openPopup(popup) {
   popup.classList.add("modal_opened");
-
-  // Add esc key handler only when a modal is opened
   document.addEventListener("keydown", handleEscClose);
-
-  // Add click handler for closing popup by clicking on overlay
   popup.addEventListener("mousedown", handleOverlayClick);
 }
 
 function closePopUp(modal) {
   modal.classList.remove("modal_opened");
-
-  // Remove esc key handler when the modal is closed
   document.removeEventListener("keydown", handleEscClose);
-
-  // Remove click handler for overlay
   modal.removeEventListener("mousedown", handleOverlayClick);
 }
 
-// Function to close the popup on ESC key press
 function handleEscClose(evt) {
   if (evt.key === "Escape") {
     const openModal = document.querySelector(".modal_opened");
@@ -92,58 +89,25 @@ function handleEscClose(evt) {
   }
 }
 
-// Function to close the popup when clicking on the overlay
 function handleOverlayClick(evt) {
   if (evt.target.classList.contains("modal_opened")) {
     closePopUp(evt.target);
   }
 }
 
-// Attach event listeners for closing modals
-modalCloseButtons.forEach((button) => {
-  button.addEventListener("click", () => {
-    closePopUp(button.closest(".modal"));
-  });
-});
-
-function createCardElement(cardData) {
-  const cardElement = cardTemplate.cloneNode(true);
-
-  const cardImageElement = cardElement.querySelector(".card__image");
-  const cardTitleElement = cardElement.querySelector(".card__title");
-  const deleteButton = cardElement.querySelector(".card__delete-button");
-  const likeButton = cardElement.querySelector(".card__like-button");
-
-  cardImageElement.src = cardData.link;
-  cardImageElement.alt = cardData.name;
-  cardTitleElement.textContent = cardData.name;
-
-  // Set up event listeners
-  deleteButton.addEventListener("click", () => {
-    cardElement.remove();
-  });
-
-  cardImageElement.addEventListener("click", () => {
-    openPreviewModal(cardData);
-  });
-
-  likeButton.addEventListener("click", () => {
-    likeButton.classList.toggle("card__like-button_active");
-  });
-
-  return cardElement;
-}
-
-function openPreviewModal(cardData) {
-  previewImage.src = cardData.link;
-  previewImage.alt = cardData.name;
-  previewCaption.textContent = cardData.name;
+function handleImageClick(name, link) {
+  console.log("Image clicked:", name, link); // Debugging Line
+  previewImage.src = link;
+  previewImage.alt = name;
+  previewCaption.textContent = name;
   openPopup(previewModal);
 }
 
-// Universal function to render a card
+// Function to render a card
 function renderCard(item, method = "prepend") {
-  const cardElement = createCardElement(item);
+  console.log("Rendering card:", item); // Debugging Line
+  const card = new Card(item, "#card-template", handleImageClick);
+  const cardElement = card.generateCard();
   cardListElement[method](cardElement);
 }
 
@@ -159,7 +123,7 @@ function handleAddCardSubmit(e) {
   e.preventDefault();
 
   const titleValue = cardForm.elements["title"].value;
-  const linkValue = cardForm.elements["description"].value;
+  const linkValue = cardForm.elements["link"].value; // Updated name
 
   const newCardData = {
     name: titleValue,
@@ -170,6 +134,7 @@ function handleAddCardSubmit(e) {
 
   // Clear the inputs only after submitting a card
   cardForm.reset();
+  cardFormValidator.resetValidation();
   closePopUp(profileAddModal);
 }
 
@@ -183,20 +148,10 @@ profileEditButton.addEventListener("click", () => {
   // Set the form fields with current profile data
   profileForm.elements["title"].value = profileTitle.textContent;
   profileForm.elements["description"].value = profileDescription.textContent;
-
-  // Hide any existing error messages for the profile form inputs
-  hideInputError(profileTitleInput, titleError, config);
-  hideInputError(profileDescriptionInput, descriptionError, config);
-
-  // Run validation to set button state on opening
-  toggleSaveButtonState(profileForm, saveButton, config);
 });
 
 addNewCardButton.addEventListener("click", () => {
   openPopup(profileAddModal);
-
-  // Run validation to set button state on opening
-  toggleSaveButtonState(cardForm, cardSaveButton, config);
 });
 
 // Initialize Cards
