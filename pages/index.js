@@ -1,7 +1,7 @@
 import FormValidator from "../components/FormValidator.js";
 import Card from "../components/Card.js";
 
-console.log("index.js loaded"); // Debugging Line
+console.log("index.js loaded");
 
 // Data
 const initialCards = [
@@ -35,7 +35,6 @@ const initialCards = [
 const profileEditButton = document.querySelector("#profile-edit-button");
 const profileEditModal = document.querySelector("#Profile-Edit-Modal");
 const profileAddModal = document.querySelector("#Profile-Add-Modal");
-const modalCloseButtons = document.querySelectorAll(".modal__close");
 const profileTitle = document.querySelector(".js-profile-title");
 const profileDescription = document.querySelector(".js-profile-description");
 const cardListElement = document.querySelector(".cards__list");
@@ -65,7 +64,7 @@ const cardFormValidator = new FormValidator(validationSettings, cardForm);
 profileFormValidator.enableValidation();
 cardFormValidator.enableValidation();
 
-console.log("FormValidators initialized"); // Debugging Line
+console.log("FormValidators initialized");
 
 // Universal functions
 function openPopup(popup) {
@@ -80,6 +79,7 @@ function closePopUp(modal) {
   modal.removeEventListener("mousedown", handleOverlayClick);
 }
 
+// Event listener to close modals by pressing ESC
 function handleEscClose(evt) {
   if (evt.key === "Escape") {
     const openModal = document.querySelector(".modal_opened");
@@ -89,14 +89,15 @@ function handleEscClose(evt) {
   }
 }
 
+// Event listener to close modals by clicking on the overlay
 function handleOverlayClick(evt) {
   if (evt.target.classList.contains("modal_opened")) {
     closePopUp(evt.target);
   }
 }
 
+// Function to open preview modal
 function handleImageClick(name, link) {
-  console.log("Image clicked:", name, link); // Debugging Line
   previewImage.src = link;
   previewImage.alt = name;
   previewCaption.textContent = name;
@@ -105,7 +106,7 @@ function handleImageClick(name, link) {
 
 // Function to render a card
 function renderCard(item, method = "prepend") {
-  console.log("Rendering card:", item); // Debugging Line
+  console.log("Rendering card:", item);
   const card = new Card(item, "#card-template", handleImageClick);
   const cardElement = card.generateCard();
   cardListElement[method](cardElement);
@@ -123,7 +124,7 @@ function handleAddCardSubmit(e) {
   e.preventDefault();
 
   const titleValue = cardForm.elements["title"].value;
-  const linkValue = cardForm.elements["link"].value; // Updated name
+  const linkValue = cardForm.elements["link"].value;
 
   const newCardData = {
     name: titleValue,
@@ -152,6 +153,15 @@ profileEditButton.addEventListener("click", () => {
 
 addNewCardButton.addEventListener("click", () => {
   openPopup(profileAddModal);
+});
+
+// Event Listeners for Close Buttons
+const modalCloseButtons = document.querySelectorAll(".modal__close");
+modalCloseButtons.forEach((button) => {
+  button.addEventListener("click", () => {
+    const modal = button.closest(".modal");
+    closePopUp(modal);
+  });
 });
 
 // Initialize Cards
