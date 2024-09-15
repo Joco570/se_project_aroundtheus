@@ -35,73 +35,6 @@
   height: 259.5px;
 }
 
-/* Header styles */
-.modal__header {
-  color: black;
-  width: 100%;
-  height: 23px;
-  font-weight: 900;
-  font-size: 24px;
-  line-height: 29.05px;
-  margin: 0 0 54px;
-}
-
-/* Save button styles */
-.modal__save {
-  height: 50.15px;
-  width: 358px;
-  margin: 0;
-  border: 1px solid white;
-  cursor: pointer;
-  background-color: black;
-  color: white;
-  font-weight: 400;
-  font-size: 18px;
-  line-height: 21.78px;
-  border-radius: 2px;
-  padding: 0;
-}
-
-.modal__save:hover {
-  opacity: 80%;
-}
-
-/* Adjusted save button styles when an error is present */
-.modal__input:invalid ~ .modal__save {
-  background-color: (255, 255, 255, 1);
-  border: 1px solid rgba(0, 0, 0, 0.2);
-  color: rgba(0, 0, 0, 0.2);
-  cursor: not-allowed;
-}
-
-/* Disabled save button styles */
-.modal__save_disabled {
-  background-color: rgba(255, 255, 255, 1);
-  border: 1px solid rgba(0, 0, 0, 0.2);
-  color: rgba(0, 0, 0, 0.2);
-  cursor: not-allowed;
-}
-
-/* Close button styles */
-.modal__close {
-  background-image: url("../images/Close.svg");
-  border: none;
-  background-color: transparent;
-  height: 40px;
-  width: 40px;
-  background-repeat: no-repeat;
-  background-size: contain;
-  position: absolute;
-  bottom: calc(100% + 6px);
-  left: calc(100% + 6px);
-  cursor: pointer;
-  z-index: 1000;
-}
-
-.modal__close:hover {
-  opacity: 60%;
-}
-
 /* Input styles */
 .modal__input {
   display: block;
@@ -146,65 +79,34 @@
 }
 
 /* Error message visible when input is invalid */
-.modal__input-error_active {
+.modal__input-error_visible {
   visibility: visible;
 }
 
-/* Preview modal container styles */
-.modal__container--preview {
-  border: none;
-  box-shadow: none;
-  background-color: transparent;
-  max-width: 75vw;
-  max-height: 75vh;
+/* Save button styles */
+.modal__save {
+  height: 50.15px;
+  width: 358px;
+  margin: 0;
+  border: 1px solid white;
+  cursor: pointer;
+  background-color: black;
+  color: white;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 21.78px;
+  border-radius: 2px;
   padding: 0;
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  margin: auto;
 }
 
-/* Responsive styles */
-@media (max-width: 768px) {
-  .modal__container {
-    width: 282px;
-  }
+.modal__save:hover {
+  opacity: 80%;
+}
 
-  .modal__close {
-    width: 26px;
-    height: 26px;
-    top: -45px;
-    right: 0;
-    bottom: auto;
-    left: auto;
-  }
-
-  .modal__header {
-    margin-bottom: 75px;
-    font-size: 18px;
-    line-height: 21.78px;
-  }
-
-  .modal__input {
-    width: calc(100% - 16px);
-  }
-
-  .modal__save {
-    width: 100%;
-    height: 46px;
-    align-self: center;
-    font-size: 14px;
-    line-height: 16.94px;
-  }
-
-  .modal__container--preview {
-    max-width: 90vw;
-    max-height: 90vh;
-  }
-
-  /* Adjustments for small screens */
-  .modal__input-error {
-    margin-top: 5px;
-    height: 30px;
-  }
+/* Disabled save button styles */
+.modal__save_disabled {
+  background-color: rgba(255, 255, 255, 1);
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  color: rgba(0, 0, 0, 0.2);
+  cursor: not-allowed;
 }
