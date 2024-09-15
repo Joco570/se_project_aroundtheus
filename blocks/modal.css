@@ -44,8 +44,8 @@
   font-size: 24px;
   line-height: 29.05px;
   margin: 0 0 54px;
-  visibility: visible; /* Ensure the header is visible */
-  opacity: 1; /* Ensure no accidental opacity issues */
+  visibility: visible;
+  opacity: 1;
 }
 
 /* Input styles */
