@@ -16,21 +16,20 @@ export default class Card {
     return cardElement;
   }
 
+  // Method to initialize class fields for DOM elements
+  _initializeFields() {
+    this._likeButton = this._element.querySelector(".card__like-button");
+    this._cardImage = this._element.querySelector(".card__image");
+    this._trashButton = this._element.querySelector(".card__delete-button");
+  }
+
   // Private method to set event listeners
   _setEventListeners() {
-    this._element
-      .querySelector(".card__delete-button")
-      .addEventListener("click", () => this._handleDeleteCard());
-
-    this._element
-      .querySelector(".card__like-button")
-      .addEventListener("click", () => this._handleLikeIcon());
-
-    this._element
-      .querySelector(".card__image")
-      .addEventListener("click", () =>
-        this._handleImageClick(this._name, this._link)
-      );
+    this._trashButton.addEventListener("click", () => this._handleDeleteCard());
+    this._likeButton.addEventListener("click", () => this._handleLikeIcon());
+    this._cardImage.addEventListener("click", () =>
+      this._handleImageClick(this._name, this._link)
+    );
   }
 
   // Private method to handle card deletion
@@ -41,19 +40,17 @@ export default class Card {
 
   // Private method to handle like button toggle
   _handleLikeIcon() {
-    this._element
-      .querySelector(".card__like-button")
-      .classList.toggle("card__like-button_active");
+    this._likeButton.classList.toggle("card__like-button_active");
   }
 
   // Public method to generate the card and attach data
   generateCard() {
     this._element = this._getTemplate();
     this._element.querySelector(".card__title").textContent = this._name;
-    const cardImage = this._element.querySelector(".card__image");
-    cardImage.src = this._link;
-    cardImage.alt = this._name;
+    this._cardImage.src = this._link;
+    this._cardImage.alt = this._name;
 
+    this._initializeFields();
     this._setEventListeners();
 
     return this._element;
