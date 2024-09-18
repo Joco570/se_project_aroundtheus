@@ -154,6 +154,10 @@ profileEditButton.addEventListener("click", () => {
   profileFormValidator.resetValidation();
 });
 
+addNewCardButton.addEventListener("click", () => {
+  openPopup(profileAddModal);
+});
+
 // Event Listeners for Close Buttons
 const modalCloseButtons = document.querySelectorAll(".modal__close");
 modalCloseButtons.forEach((button) => {
