@@ -152,7 +152,13 @@ function handleAddCardSubmit(e) {
 
   // Clear the inputs only after submitting a card
   cardForm.reset();
-  formValidators[cardForm.getAttribute("name")].resetValidation();
+
+  // Disable the button after submission
+  formValidators[cardForm.getAttribute("name")].disableButton();
+
+  // Fully reset validation and interaction state after submission
+  formValidators[cardForm.getAttribute("name")].resetOnSubmit();
+
   closePopUp(profileAddModal);
 }
 
@@ -160,6 +166,7 @@ function handleAddCardSubmit(e) {
 profileForm.addEventListener("submit", handleProfileEditSubmit);
 cardForm.addEventListener("submit", handleAddCardSubmit);
 
+// Edit Profile Modal: Always clear validation errors and reset interaction flags when opened
 profileEditButton.addEventListener("click", () => {
   openPopup(profileEditModal);
 
@@ -167,15 +174,17 @@ profileEditButton.addEventListener("click", () => {
   profileForm.elements["title"].value = profileTitle.textContent;
   profileForm.elements["description"].value = profileDescription.textContent;
 
-  // Call resetValidation to remove possible errors using the formValidators object
+  // Always reset validation for the Edit Profile modal
   formValidators[profileForm.getAttribute("name")].resetValidation();
+
+  // Disable the submit button until the form is valid
+  formValidators[profileForm.getAttribute("name")].disableButton();
 });
 
+// Add Card Modal: Do not reset validation when reopening (retain errors)
 addNewCardButton.addEventListener("click", () => {
   openPopup(profileAddModal);
-
-  // Call resetValidation to remove possible errors using the formValidators object
-  formValidators[cardForm.getAttribute("name")].resetValidation();
+  // Do not reset validation to retain error states on reopening
 });
 
 // Event Listeners for Close Buttons
