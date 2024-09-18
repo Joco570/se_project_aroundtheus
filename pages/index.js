@@ -149,10 +149,9 @@ profileEditButton.addEventListener("click", () => {
   // Set the form fields with current profile data
   profileForm.elements["title"].value = profileTitle.textContent;
   profileForm.elements["description"].value = profileDescription.textContent;
-});
 
-addNewCardButton.addEventListener("click", () => {
-  openPopup(profileAddModal);
+  // Call resetValidation to remove possible errors
+  profileFormValidator.resetValidation();
 });
 
 // Event Listeners for Close Buttons
