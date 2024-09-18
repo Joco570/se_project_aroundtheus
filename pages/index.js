@@ -41,7 +41,7 @@ const cardListElement = document.querySelector(".cards__list");
 const addNewCardButton = document.querySelector(".profile__add-button");
 const previewModal = document.querySelector("#Preview-Modal");
 const previewImage = previewModal.querySelector(".modal__image");
-const previewCaption = previewModal.querySelector("#modal-caption");
+const previewCaption = document.querySelector("#modal-caption");
 
 // Accessing forms using document.forms
 const profileForm = document.forms["profile-form"];
@@ -57,12 +57,29 @@ const validationSettings = {
   errorClass: "modal__input-error_visible",
 };
 
-// Create a FormValidator instance for each form
-const profileFormValidator = new FormValidator(validationSettings, profileForm);
-const cardFormValidator = new FormValidator(validationSettings, cardForm);
+// Object for storing form validators
+const formValidators = {};
 
-profileFormValidator.enableValidation();
-cardFormValidator.enableValidation();
+// Enable validation function for all forms
+const enableValidation = (config) => {
+  const formList = Array.from(document.querySelectorAll(config.formSelector));
+
+  formList.forEach((formElement) => {
+    const validator = new FormValidator(config, formElement);
+
+    // Use the name attribute of the form as the key
+    const formName = formElement.getAttribute("name");
+
+    // Store the validator instance using the form's name
+    formValidators[formName] = validator;
+
+    // Enable validation for this form
+    validator.enableValidation();
+  });
+};
+
+// Initialize validation
+enableValidation(validationSettings);
 
 console.log("FormValidators initialized");
 
@@ -135,7 +152,7 @@ function handleAddCardSubmit(e) {
 
   // Clear the inputs only after submitting a card
   cardForm.reset();
-  cardFormValidator.resetValidation();
+  formValidators[cardForm.getAttribute("name")].resetValidation();
   closePopUp(profileAddModal);
 }
 
@@ -150,12 +167,15 @@ profileEditButton.addEventListener("click", () => {
   profileForm.elements["title"].value = profileTitle.textContent;
   profileForm.elements["description"].value = profileDescription.textContent;
 
-  // Call resetValidation to remove possible errors
-  profileFormValidator.resetValidation();
+  // Call resetValidation to remove possible errors using the formValidators object
+  formValidators[profileForm.getAttribute("name")].resetValidation();
 });
 
 addNewCardButton.addEventListener("click", () => {
   openPopup(profileAddModal);
+
+  // Call resetValidation to remove possible errors using the formValidators object
+  formValidators[cardForm.getAttribute("name")].resetValidation();
 });
 
 // Event Listeners for Close Buttons
