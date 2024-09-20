@@ -67,13 +67,10 @@ const enableValidation = (config) => {
   formList.forEach((formElement) => {
     const validator = new FormValidator(config, formElement);
 
-    // Use the name attribute of the form as the key
     const formName = formElement.getAttribute("name");
 
-    // Store the validator instance using the form's name
     formValidators[formName] = validator;
 
-    // Enable validation for this form
     validator.enableValidation();
   });
 };
@@ -157,7 +154,7 @@ function handleAddCardSubmit(e) {
   formValidators[cardForm.getAttribute("name")].disableButton();
 
   // Fully reset validation and interaction state after submission
-  formValidators[cardForm.getAttribute("name")].resetOnSubmit();
+  formValidators[cardForm.getAttribute("name")].resetValidation();
 
   closePopUp(profileAddModal);
 }
@@ -170,21 +167,17 @@ cardForm.addEventListener("submit", handleAddCardSubmit);
 profileEditButton.addEventListener("click", () => {
   openPopup(profileEditModal);
 
-  // Set the form fields with current profile data
   profileForm.elements["title"].value = profileTitle.textContent;
   profileForm.elements["description"].value = profileDescription.textContent;
 
-  // Always reset validation for the Edit Profile modal
   formValidators[profileForm.getAttribute("name")].resetValidation();
 
-  // Disable the submit button until the form is valid
   formValidators[profileForm.getAttribute("name")].disableButton();
 });
 
 // Add Card Modal: Do not reset validation when reopening (retain errors)
 addNewCardButton.addEventListener("click", () => {
   openPopup(profileAddModal);
-  // Do not reset validation to retain error states on reopening
 });
 
 // Event Listeners for Close Buttons

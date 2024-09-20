@@ -8,9 +8,7 @@ export default class FormValidator {
     this._submitButton = this._formElement.querySelector(
       this._settings.submitButtonSelector
     );
-    // Store interaction status for each input
-    this._isInputInteracted = new Map();
-    this._isFirstOpen = true; // Track if the modal is opened for the first time
+    this._isInputInteracted = new Map(); // Store interaction status for each input
   }
 
   _hasInvalidInput() {
@@ -19,8 +17,7 @@ export default class FormValidator {
 
   _toggleButtonState() {
     if (this._hasInvalidInput()) {
-      this._submitButton.classList.add(this._settings.inactiveButtonClass);
-      this._submitButton.disabled = true;
+      this.disableButton();
     } else {
       this._submitButton.classList.remove(this._settings.inactiveButtonClass);
       this._submitButton.disabled = false;
@@ -33,7 +30,6 @@ export default class FormValidator {
     );
     const isInteracted = this._isInputInteracted.get(inputElement);
 
-    // If it's the first time opening, don't show errors until interaction
     if (!inputElement.validity.valid && isInteracted) {
       inputElement.classList.add(this._settings.inputErrorClass);
       errorElement.textContent = inputElement.validationMessage;
@@ -47,11 +43,9 @@ export default class FormValidator {
 
   _setEventListeners() {
     this._inputList.forEach((inputElement) => {
-      // Initialize the interaction flag as false for each input
       this._isInputInteracted.set(inputElement, false);
 
       inputElement.addEventListener("input", () => {
-        // Mark the input as interacted when the user types
         this._isInputInteracted.set(inputElement, true);
 
         this._checkInputValidity(inputElement);
@@ -71,28 +65,18 @@ export default class FormValidator {
         `#${inputElement.id}-error`
       );
 
-      // Clear the error message and the input error class
       inputElement.classList.remove(this._settings.inputErrorClass);
       errorElement.textContent = "";
       errorElement.classList.remove(this._settings.errorClass);
 
-      // Reset the interaction flag for each input (specific to Add Card behavior)
       this._isInputInteracted.set(inputElement, false);
     });
 
-    // Disable the submit button until valid input is provided
-    this._toggleButtonState();
+    this.disableButton(); // Always disable the button after resetting validation
   }
 
-  // New method to disable the submit button
   disableButton() {
     this._submitButton.classList.add(this._settings.inactiveButtonClass);
     this._submitButton.disabled = true;
-  }
-
-  // Call this on successful submit to reset the modal fully
-  resetOnSubmit() {
-    this.resetValidation();
-    this._isFirstOpen = true;
   }
 }
