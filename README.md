@@ -1,4 +1,4 @@
-# Around The U.s>
+# Around The U.S.>
 
 This is the third project of the Software Engineering program at TripleTen, built for Sprint 7. It was created using HTML, CSS, and Javascript based on provided figma designs.
 
