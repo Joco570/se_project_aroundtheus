@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="author" content="Joe Coval" />
+    <meta name="description" content="Around The U.S." />
+    <title>Around The U.S.</title>
+  </head>
+  <body class="page">
+    <header class="header">
+      <img
+        src="<%=require('./images/logo.svg')%>"
+        alt="Around The U.S. Logo"
+        class="header__logo"
+      />
+    </header>
+    <div class="page__content">
+      <main class="content">
+        <section class="profile">
+          <img
+            src="<%=require('/src/images/Avatar.svg')%>"
+            alt="avatar image"
+            class="profile__image"
+          />
+          <div class="profile__info">
+            <h1 class="profile__title js-profile-title">Jacques Cousteau</h1>
+            <button
+              class="profile__edit-button"
+              id="profile-edit-button"
+              type="button"
+            ></button>
+            <p class="profile__description js-profile-description">Explorer</p>
+          </div>
+          <button class="profile__add-button" type="button"></button>
+        </section>
+        <section class="cards">
+          <ul class="cards__list"></ul>
+        </section>
+      </main>
+    </div>
+    <footer class="footer">
+      <p class="footer__copyright">&copy; 2022 Around The U.S.</p>
+    </footer>
+
+    <!-- Edit Profile Modal -->
+    <div class="modal" id="Profile-Edit-Modal">
+      <div class="modal__container">
+        <button class="modal__close" id="modal-close-button"></button>
+        <p class="modal__header">Edit Profile</p>
+
+        <form
+          class="modal__form"
+          id="profile-edit-form"
+          name="profile-form"
+          novalidate
+        >
+          <div class="modal__input-wrapper" id="profile-title-input-wrapper">
+            <input
+              type="text"
+              name="title"
+              id="profile-title-input"
+              placeholder="Name"
+              class="modal__input"
+              minlength="2"
+              maxlength="40"
+              required
+            />
+            <span
+              class="modal__input-error"
+              id="profile-title-input-error"
+            ></span>
+          </div>
+
+          <div
+            class="modal__input-wrapper"
+            id="profile-description-input-wrapper"
+          >
+            <input
+              type="text"
+              name="description"
+              id="profile-description-input"
+              placeholder="About"
+              class="modal__input"
+              minlength="2"
+              maxlength="200"
+              required
+            />
+            <span
+              class="modal__input-error"
+              id="profile-description-input-error"
+            ></span>
+          </div>
+
+          <button
+            class="modal__save modal__save_disabled"
+            id="modal-save-button"
+            type="submit"
+            disabled
+          >
+            Save
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Add Card Modal -->
+    <div class="modal" id="Profile-Add-Modal">
+      <div class="modal__container">
+        <button class="modal__close" id="modal-close-button"></button>
+        <p class="modal__header">New Place</p>
+
+        <form
+          class="modal__form"
+          id="profile-add-form"
+          name="card-form"
+          novalidate
+        >
+          <div class="modal__input-wrapper">
+            <input
+              type="text"
+              name="title"
+              id="modal-add-title"
+              placeholder="Title"
+              class="modal__input"
+              minlength="1"
+              maxlength="30"
+              required
+            />
+            <span class="modal__input-error" id="modal-add-title-error"></span>
+          </div>
+
+          <div class="modal__input-wrapper">
+            <input
+              type="url"
+              name="link"
+              id="modal-add-link"
+              placeholder="Image Link"
+              class="modal__input"
+              required
+            />
+            <span class="modal__input-error" id="modal-add-link-error"></span>
+          </div>
+
+          <button
+            class="modal__save modal__save_disabled"
+            id="modal-save-button"
+            type="submit"
+            disabled
+          >
+            Save
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Preview Modal -->
+    <div class="modal" id="Preview-Modal">
+      <div class="modal__container--preview">
+        <button
+          class="modal__close modal__close--preview"
+          id="modal-close-button"
+        ></button>
+        <img class="modal__image" src="" alt="" />
+        <p class="modal__caption" id="modal-caption"></p>
+      </div>
+    </div>
+
+    <!-- Card Template -->
+    <template id="card-template">
+      <li class="card">
+        <button class="card__delete-button" type="button"></button>
+        <img src="" class="card__image" alt="" />
+        <div class="card__description">
+          <h2 class="card__title"></h2>
+          <button class="card__like-button" type="button"></button>
+        </div>
+      </li>
+    </template>
+  </body>
+</html>
