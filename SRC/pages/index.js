@@ -1,5 +1,7 @@
+// index.js
 import FormValidator from "../components/FormValidator.js";
 import Card from "../components/Card.js";
+import Section from "../components/Section.js";
 import "../pages/index.css";
 
 console.log("index.js loaded");
@@ -81,6 +83,27 @@ enableValidation(validationSettings);
 
 console.log("FormValidators initialized");
 
+// Function to render a card
+function renderCard(item) {
+  const card = new Card(item, "#card-template", handleImageClick);
+  const cardElement = card.generateCard();
+  cardSection.addItem(cardElement); // Use Section's method to add the card
+}
+
+// Section instance for managing cards
+const cardSection = new Section(
+  {
+    items: initialCards,
+    renderer: (item) => {
+      renderCard(item);
+    },
+  },
+  ".cards__list"
+);
+
+// Call renderItems once on page load
+cardSection.renderItems();
+
 // Universal functions
 function openPopup(popup) {
   popup.classList.add("modal_opened");
@@ -117,14 +140,6 @@ function handleImageClick(name, link) {
   previewImage.alt = name;
   previewCaption.textContent = name;
   openPopup(previewModal);
-}
-
-// Function to render a card
-function renderCard(item, method = "prepend") {
-  console.log("Rendering card:", item);
-  const card = new Card(item, "#card-template", handleImageClick);
-  const cardElement = card.generateCard();
-  cardListElement[method](cardElement);
 }
 
 // Event Handlers
@@ -188,9 +203,4 @@ modalCloseButtons.forEach((button) => {
     const modal = button.closest(".modal");
     closePopUp(modal);
   });
-});
-
-// Initialize Cards
-initialCards.forEach((cardData) => {
-  renderCard(cardData, "append");
 });
