@@ -8,7 +8,7 @@ export default class FormValidator {
     this._submitButton = this._formElement.querySelector(
       this._settings.submitButtonSelector
     );
-    this._isInputInteracted = new Map(); // Store interaction status for each input
+    this._isInputInteracted = new Map();
   }
 
   _hasInvalidInput() {
@@ -72,7 +72,7 @@ export default class FormValidator {
       this._isInputInteracted.set(inputElement, false);
     });
 
-    this.disableButton(); // Always disable the button after resetting validation
+    this.disableButton();
   }
 
   disableButton() {

@@ -9,12 +9,12 @@ export default class Section {
   renderItems() {
     this._items.forEach((item) => {
       const element = this._renderer(item);
-      this.addItem(element); // Add each element to the container
+      this.addItem(element);
     });
   }
 
   // Add a single item to the container
   addItem(element) {
-    this._container.prepend(element); // Adds the new card at the start of the container
+    this._container.prepend(element);
   }
 }
