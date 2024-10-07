@@ -24,13 +24,13 @@ export class PopupWithForm extends Popup {
       evt.preventDefault();
       const inputData = this._getInputValues();
       this._submitCallback(inputData);
+      this._formElement.reset(); // Only reset after successful submission
       this.close();
-      this._formElement.reset();
     });
   }
 
   open() {
     super.open();
-    this._formElement.reset();
+    // Removed this._formElement.reset() from here to preserve input values
   }
 }
