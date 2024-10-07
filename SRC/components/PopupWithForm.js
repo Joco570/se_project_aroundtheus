@@ -5,7 +5,6 @@ export class PopupWithForm extends Popup {
     super(popupSelector);
     this._submitCallback = submitCallback;
     this._formElement = this._popupElement.querySelector(".modal__form");
-    this.setEventListeners();
   }
 
   _getInputValues() {
@@ -28,5 +27,10 @@ export class PopupWithForm extends Popup {
       this.close();
       this._formElement.reset();
     });
+  }
+
+  open() {
+    super.open();
+    this._formElement.reset();
   }
 }
