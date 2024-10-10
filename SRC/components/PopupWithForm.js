@@ -28,9 +28,4 @@ export class PopupWithForm extends Popup {
       this.close();
     });
   }
-
-  open() {
-    super.open();
-    // Removed this._formElement.reset() from here to preserve input values
-  }
 }

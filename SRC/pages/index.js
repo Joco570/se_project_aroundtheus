@@ -37,14 +37,23 @@ function handleImageClick(name, link) {
   popupWithImage.open({ name, link });
 }
 
+// Create card function
+function createCard(item) {
+  const card = new Card(item, "#card-template", handleImageClick);
+  return card.generateCard();
+}
+
+// Universal render function to append or prepend card
+function renderCard(item, method = "addItem") {
+  const cardElement = createCard(item);
+  cardSection[method](cardElement);
+}
+
 // Section for managing cards
 const cardSection = new Section(
   {
     items: initialCards,
-    renderer: (item) => {
-      const card = new Card(item, "#card-template", handleImageClick);
-      return card.generateCard();
-    },
+    renderer: createCard, // No need for a function here, just pass the reference
   },
   ".cards__list"
 );
@@ -57,10 +66,7 @@ function handleAddCardSubmit(data) {
     link: data.link,
   };
 
-  const card = new Card(newCardData, "#card-template", handleImageClick);
-  const cardElement = card.generateCard();
-
-  cardSection.addItem(cardElement);
+  renderCard(newCardData);
   popupWithAddCardForm.close();
 }
 
