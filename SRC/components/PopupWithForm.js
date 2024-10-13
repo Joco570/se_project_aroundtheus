@@ -24,7 +24,10 @@ export class PopupWithForm extends Popup {
       evt.preventDefault();
       const inputData = this._getInputValues();
       this._submitCallback(inputData);
-      this._formElement.reset(); // Only reset after successful submission
+
+      // Reset form and validation
+      this._formElement.reset();
+      formValidators[this._formElement.getAttribute("name")].resetValidation(); // Disable button after successful submission
       this.close();
     });
   }

@@ -53,7 +53,7 @@ function renderCard(item, method = "addItem") {
 const cardSection = new Section(
   {
     items: initialCards,
-    renderer: createCard, // No need for a function here, just pass the reference
+    renderer: createCard,
   },
   ".cards__list"
 );
@@ -113,4 +113,7 @@ profileEditButton.addEventListener("click", () => {
 // Add Card Modal
 addNewCardButton.addEventListener("click", () => {
   popupWithAddCardForm.open();
+
+  // Reset validation and disable the button on opening the modal
+  formValidators[cardForm.getAttribute("name")].resetValidation();
 });

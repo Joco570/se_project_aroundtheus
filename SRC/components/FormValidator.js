@@ -72,6 +72,7 @@ export default class FormValidator {
       this._isInputInteracted.set(inputElement, false);
     });
 
+    // Disable the button initially after resetting the form
     this.disableButton();
   }
 
