@@ -27,7 +27,6 @@ export class PopupWithForm extends Popup {
 
       // Reset form and validation
       this._formElement.reset();
-      formValidators[this._formElement.getAttribute("name")].resetValidation(); // Disable button after successful submission
       this.close();
     });
   }

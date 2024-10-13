@@ -66,6 +66,9 @@ function handleAddCardSubmit(data) {
     link: data.link,
   };
 
+  // Disable the submit button after form submission but before rendering
+  formValidators[cardForm.getAttribute("name")].disableButton();
+
   renderCard(newCardData);
   popupWithAddCardForm.close();
 }
@@ -113,7 +116,4 @@ profileEditButton.addEventListener("click", () => {
 // Add Card Modal
 addNewCardButton.addEventListener("click", () => {
   popupWithAddCardForm.open();
-
-  // Reset validation and disable the button on opening the modal
-  formValidators[cardForm.getAttribute("name")].resetValidation();
 });
